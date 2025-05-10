@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaytoPlay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="PaytoPlay Logo" class="logo">
+    </header>
+    
+    <main>
+        <div class="buttons">
+            <button onclick="alert('Маркет скоро будет доступен')">Маркет</button>
+            <button onclick="alert('Профиль скоро будет доступен')">Профиль</button>
+        </div>
+    </main>
+</body>
+</html>
