@@ -160,12 +160,14 @@
 
     function buyGame() {
       if (selectedGame) {
+        const orderId = Math.floor(Math.random() * 90000 + 10000); // Генерация уникального номера заказа
         tg.sendData(JSON.stringify({
           action: "buy",
           title: selectedGame.title,
-          price: selectedGame.price
+          price: selectedGame.price,
+          order_id: orderId
         }));
-        alert(`Вы выбрали покупку: ${selectedGame.title}`);
+        alert(`Вы выбрали покупку: ${selectedGame.title}\nНомер заказа: #${orderId}`);
       }
     }
 
