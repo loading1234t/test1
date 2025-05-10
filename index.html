@@ -2,321 +2,83 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Game Market</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #0e0e0e;
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      overflow-y: auto;
+      font-family: sans-serif;
       padding: 20px;
     }
-    .nav-buttons {
-      margin: 20px 0;
-    }
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #6f42c1, #007bff);
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: linear-gradient(90deg, #007bff, #6f42c1);
-    }
-    .game-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      width: 100%;
-      max-width: 800px;
-    }
+
     .game {
-      background-color: #1c1c1c;
-      padding: 15px;
+      border: 1px solid #ccc;
       border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .game img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .game h3 {
-      font-size: 16px;
-    }
-    .game-detail {
-      display: none;
-      max-width: 600px;
-      text-align: left;
-      width: 100%;
-    }
-    .game-detail img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .seller-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #1c1c1c;
       padding: 10px;
-      border-radius: 10px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    .seller-info-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .rating {
-      font-size: 14px;
-      color: #ffcc00;
-    }
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      color: #00ff88;
-    }
-    .action-buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .seller-description {
-      display: none;
-      background-color: #1c1c1c;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    .profile {
-      display: none;
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-    }
-    .profile img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-    .profile button {
-      width: 100%;
-      margin: 10px 0;
-    }
-    .back-button {
       margin-bottom: 20px;
     }
-    .back-button button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 10px;
-      background-color: #d9534f;
+
+    .game img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .btn-group {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: #4CAF50;
       color: white;
+      font-size: 16px;
       cursor: pointer;
     }
-    .back-button button:hover {
-      background-color: #c9302c;
+
+    button.chat {
+      background-color: #2196F3;
     }
-    .support-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #007bff;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-    .support-button img {
-      width: 30px;
-      height: 30px;
+
+    button:hover {
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
-  <div class="nav-buttons" id="mainMenu">
-    <button onclick="openMarket()">Маркет</button>
-    <button onclick="openProfile()">Профиль</button>
-  </div>
+  <h2>🎮 Наши игры</h2>
 
-  <div class="game-list" id="gameList"></div>
-
-  <div class="game-detail" id="gameDetail">
-    <div class="back-button">
-      <button onclick="goBackToMarket()">← Назад</button>
-    </div>
-    <img id="detailImage" src="" alt="Game Image">
-    <h2 id="detailTitle"></h2>
-    <p id="detailDescription"></p>
-
-    <div class="seller-info" onclick="showSellerDescription()">
-      <div class="seller-info-left">
-        <img id="sellerAvatar" class="avatar" src="avatar.jpg" alt="Avatar">
-        <span class="rating" id="sellerRating">★ 4.8</span>
-      </div>
-      <div class="price" id="gamePrice">99₽</div>
-    </div>
-
-    <div class="seller-description" id="sellerDescription">
-      <div class="back-button">
-        <button onclick="hideSellerDescription()">← Назад</button>
-      </div>
-      <h3>Описание товара и продавца</h3>
-      <p>🌟 Купите UC по суперцене! Надежность, быстрая доставка и гибкие условия. Пишите мне, чтобы сделать заказ!</p>
-      <div class="action-buttons">
-        <button onclick="buyGame()">Купить</button>
-        <button onclick="chatWithSeller()">Чат</button>
-      </div>
+  <div class="game">
+    <img src="https://placehold.co/300x150" alt="Game 1">
+    <h3>Игра 1</h3>
+    <p>Описание игры. Очень крутая игра.</p>
+    <div class="btn-group">
+      <button onclick="sendOrder()">Купить</button>
+      <button class="chat" onclick="sendChat()">Чат</button>
     </div>
   </div>
 
-  <div class="profile" id="profileSection">
-    <div class="back-button">
-      <button onclick="goBackToMenu()">← Назад</button>
+  <div class="game">
+    <img src="https://placehold.co/300x150" alt="Game 2">
+    <h3>Игра 2</h3>
+    <p>Описание второй игры. Ещё круче!</p>
+    <div class="btn-group">
+      <button onclick="sendOrder()">Купить</button>
+      <button class="chat" onclick="sendChat()">Чат</button>
     </div>
-    <img id="userPhoto" class="avatar" src="" alt="User Photo">
-    <h2 id="userName">Имя пользователя</h2>
-    <div class="action-buttons">
-      <button onclick="alert('Внести деньги')">💰 Внести</button>
-      <button onclick="alert('Вывести деньги')">💸 Вывести</button>
-      <button onclick="alert('История покупок')">📜 История</button>
-      <button onclick="alert('Поддержка')">🛠 Поддержка</button>
-    </div>
-  </div>
-
-  <div class="support-button" onclick="openTelegramChat()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Telegram_icon_%282019%29.svg/1200px-Telegram_icon_%282019%29.svg.png" alt="Support Icon">
   </div>
 
   <script>
-    const games = [
-      {
-        title: "PUBG Mobile",
-        image: "Pubg.jpg",
-        description: "Популярный мобильный шутер с королевской битвой.",
-        price: "99₽",
-        sellerAvatar: "avatar.jpg",
-        rating: "★ 4.8"
-      },
-      {
-        title: "Free Fire",
-        image: "Free_Fire.jpg",
-        description: "Экшн игра с короткими матчами и быстрой динамикой.",
-        price: "89₽",
-        sellerAvatar: "avatar.jpg",
-        rating: "★ 4.7"
-      },
-      {
-        title: "Mobile Legends",
-        image: "Mobile_Legends.jpg",
-        description: "MOBA на мобилке с множеством героев и быстрой игрой.",
-        price: "109₽",
-        sellerAvatar: "avatar.jpg",
-        rating: "★ 4.9"
-      },
-      {
-        title: "Call of Duty: Mobile",
-        image: "COD_Mobile.jpg",
-        description: "Мобильная версия знаменитого шутера с мультиплеером.",
-        price: "129₽",
-        sellerAvatar: "avatar.jpg",
-        rating: "★ 5.0"
-      }
-    ];
+    const tg = window.Telegram.WebApp;
+    tg.expand();
 
-    function openMarket() {
-      document.getElementById("mainMenu").style.display = "none";
-      document.getElementById("profileSection").style.display = "none";
-      const list = document.getElementById("gameList");
-      list.innerHTML = games.map((game, i) => `
-        <div class="game" onclick="showGameDetail(${i})">
-          <img src="${game.image}" alt="${game.title}">
-          <h3>${game.title}</h3>
-        </div>
-      `).join("");
-      list.style.display = "grid";
+    function sendChat() {
+      tg.sendData("chat");
     }
 
-    function showGameDetail(index) {
-      const game = games[index];
-      document.getElementById("gameList").style.display = "none";
-      document.getElementById("gameDetail").style.display = "block";
-      document.getElementById("sellerDescription").style.display = "none";
-      document.getElementById("detailTitle").textContent = game.title;
-      document.getElementById("detailImage").src = game.image;
-      document.getElementById("detailImage").alt = game.title;
-      document.getElementById("detailDescription").textContent = game.description;
-      document.getElementById("gamePrice").textContent = game.price;
-      document.getElementById("sellerAvatar").src = game.sellerAvatar;
-      document.getElementById("sellerRating").textContent = game.rating;
-    }
-
-    function goBackToMarket() {
-      document.getElementById("gameDetail").style.display = "none";
-      document.getElementById("gameList").style.display = "grid";
-    }
-
-    function showSellerDescription() {
-      document.getElementById("sellerDescription").style.display = "block";
-    }
-
-    function hideSellerDescription() {
-      document.getElementById("sellerDescription").style.display = "none";
-    }
-
-    function openProfile() {
-      document.getElementById("mainMenu").style.display = "none";
-      document.getElementById("gameList").style.display = "none";
-      document.getElementById("gameDetail").style.display = "none";
-      document.getElementById("profileSection").style.display = "block";
-    }
-
-    function goBackToMenu() {
-      document.getElementById("profileSection").style.display = "none";
-      document.getElementById("mainMenu").style.display = "block";
-    }
-
-    function buyGame() {
-      Telegram.WebApp.sendData("buy");
-    }
-
-    function chatWithSeller() {
-      Telegram.WebApp.sendData("chat");
-    }
-
-    function openTelegramChat() {
-      window.open("https://t.me/Dma12r", "_blank");
+    function sendOrder() {
+      tg.sendData("order");
     }
   </script>
 </body>
