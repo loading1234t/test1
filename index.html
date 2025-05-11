@@ -3,9 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <title>Game Market</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    /* [CSS оставлен без изменений, он у тебя уже аккуратный и красивый] */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      background-color: #0088cc;
+    }
+
+    .nav-buttons button {
+      padding: 10px 20px;
+      border: none;
+      background-color: white;
+      color: #0088cc;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .game-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .game {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .game img {
+      width: 100%;
+      height: auto;
+    }
+
+    .game h3 {
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .game-detail, .seller-description, .profile {
+      padding: 15px;
+    }
+
+    .back-button {
+      margin-bottom: 10px;
+    }
+
+    .back-button button {
+      background: none;
+      border: none;
+      color: #0088cc;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .seller-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      cursor: pointer;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .seller-info-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .rating {
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 18px;
+      color: #008800;
+      font-weight: bold;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+    }
+
+    .action-buttons button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #0088cc;
+      color: white;
+      cursor: pointer;
+    }
+
+    .support-button {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .support-button img {
+      width: 30px;
+      height: 30px;
+    }
+
+    h2, h3, p {
+      margin: 10px 0;
+    }
   </style>
 </head>
 <body>
@@ -20,7 +158,7 @@
     <div class="back-button">
       <button onclick="goBackToMarket()">← Назад</button>
     </div>
-    <img id="detailImage" src="" alt="Game Image">
+    <img id="detailImage" src="" alt="Game Image" style="width: 100%; border-radius: 10px;">
     <h2 id="detailTitle"></h2>
     <p id="detailDescription"></p>
 
@@ -52,10 +190,10 @@
     <img id="userPhoto" class="avatar" src="avatar.jpg" alt="User Photo">
     <h2 id="userName">Имя пользователя</h2>
     <div class="action-buttons">
-      <button onclick="alert('Внести деньги')">💰 Внести</button>
-      <button onclick="alert('Вывести деньги')">💸 Вывести</button>
-      <button onclick="alert('История покупок')">📜 История</button>
-      <button onclick="alert('Поддержка')">🛠 Поддержка</button>
+      <button onclick="alert('💰 Внести деньги')">💰 Внести</button>
+      <button onclick="alert('💸 Вывести деньги')">💸 Вывести</button>
+      <button onclick="alert('📜 История покупок')">📜 История</button>
+      <button onclick="alert('🛠 Поддержка')">🛠 Поддержка</button>
     </div>
   </div>
 
@@ -105,11 +243,7 @@
     let selectedGame = null;
 
     function openMarket() {
-      document.getElementById("mainMenu").style.display = "none";
-      document.getElementById("profileSection").style.display = "none";
-      document.getElementById("gameDetail").style.display = "none";
-      document.getElementById("gameList").style.display = "grid";
-
+      hideAll();
       const list = document.getElementById("gameList");
       list.innerHTML = games.map((game, i) => `
         <div class="game" onclick="showGameDetail(${i})">
@@ -117,20 +251,20 @@
           <h3>${game.title}</h3>
         </div>
       `).join("");
+      list.style.display = "grid";
     }
 
     function showGameDetail(index) {
       selectedGame = games[index];
-      document.getElementById("gameList").style.display = "none";
+      hideAll();
       document.getElementById("gameDetail").style.display = "block";
-      document.getElementById("sellerDescription").style.display = "none";
-
       document.getElementById("detailTitle").textContent = selectedGame.title;
       document.getElementById("detailImage").src = selectedGame.image;
       document.getElementById("detailDescription").textContent = selectedGame.description;
       document.getElementById("gamePrice").textContent = selectedGame.price;
       document.getElementById("sellerAvatar").src = selectedGame.sellerAvatar;
       document.getElementById("sellerRating").textContent = selectedGame.rating;
+      document.getElementById("sellerDescription").style.display = "none";
     }
 
     function showSellerDescription() {
@@ -142,25 +276,23 @@
     }
 
     function goBackToMarket() {
-      document.getElementById("gameDetail").style.display = "none";
+      hideAll();
       document.getElementById("gameList").style.display = "grid";
     }
 
     function openProfile() {
-      document.getElementById("mainMenu").style.display = "none";
-      document.getElementById("gameList").style.display = "none";
-      document.getElementById("gameDetail").style.display = "none";
+      hideAll();
       document.getElementById("profileSection").style.display = "block";
     }
 
     function goBackToMenu() {
-      document.getElementById("profileSection").style.display = "none";
-      document.getElementById("mainMenu").style.display = "block";
+      hideAll();
+      document.getElementById("mainMenu").style.display = "flex";
     }
 
     function buyGame() {
       if (selectedGame) {
-        const orderId = Math.floor(Math.random() * 90000 + 10000); // Генерация уникального номера заказа
+        const orderId = Math.floor(Math.random() * 90000 + 10000);
         tg.sendData(JSON.stringify({
           action: "buy",
           title: selectedGame.title,
@@ -172,14 +304,18 @@
     }
 
     function chatWithSeller() {
-      if (selectedGame) {
-        tg.sendData("chat");
-        alert("Чат с продавцом будет открыт в Telegram.");
-      }
+      tg.sendData("chat");
     }
 
     function openTelegramChat() {
       tg.sendData("chat");
+    }
+
+    function hideAll() {
+      document.getElementById("mainMenu").style.display = "none";
+      document.getElementById("gameList").style.display = "none";
+      document.getElementById("gameDetail").style.display = "none";
+      document.getElementById("profileSection").style.display = "none";
     }
   </script>
 </body>
