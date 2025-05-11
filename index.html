@@ -1,52 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Game Market</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-    }
-
-    .nav-buttons {
-      display: flex;
-      justify-content: center;
-      padding: 10px;
-      background-color: #0088cc;
-    }
-
-    .nav-buttons button {
-      padding: 10px 20px;
-      border: none;
-      background-color: white;
-      color: #0088cc;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма связи с продавцом</title>
 </head>
 <body>
-  <div class="nav-buttons">
-    <button onclick="chatWithSeller()">Чат</button>
-  </div>
+    <h2>Свяжитесь с продавцом</h2>
 
-  <script>
-    const tg = window.Telegram.WebApp;
+    <form id="messageForm">
+        <label for="name">Ваше имя:</label><br>
+        <input type="text" id="name" name="name"><br><br>
 
-    // Убедимся, что WebApp загружен
-    tg.expand();
+        <label for="message">Ваш запрос:</label><br>
+        <textarea id="message" name="message"></textarea><br><br>
 
-    function chatWithSeller() {
-      console.log("Кнопка 'Чат' нажата");
-      tg.sendData("chat");
-    }
-  </script>
+        <button type="button" onclick="sendDataToBot()">Отправить сообщение продавцу</button>
+    </form>
+
+    <script type="text/javascript">
+        function sendDataToBot() {
+            const name = document.getElementById("name").value;
+            const message = document.getElementById("message").value;
+
+            if (!name || !message) {
+                alert("Пожалуйста, заполните все поля.");
+                return;
+            }
+
+            // Отправка данных через WebApp
+            Telegram.WebApp.sendData(JSON.stringify({
+                name: name,
+                message: message
+            }));
+
+            alert("Ваше сообщение отправлено продавцу.");
+        }
+    </script>
 </body>
 </html>
