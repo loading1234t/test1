@@ -1,41 +1,857 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма связи с продавцом</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game & Donates Marketplace</title>
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin:0; padding:0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: #7158e2;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background-color 0.25s ease;
+    }
+    button:hover, button:focus {
+      background-color: #5a44b0;
+      outline: none;
+    }
+
+    /* Header */
+    header {
+      background: rgba(20,18,40,0.85);
+      backdrop-filter: saturate(180%) blur(16px);
+      padding: 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      background: linear-gradient(45deg, #ff4e50, #f9d423);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 6px rgba(255,255,255,0.1);
+    }
+    nav {
+    }
+    nav ul {
+      list-style:none;
+      display: flex;
+      gap: 2rem;
+      margin: 0; padding:0;
+    }
+    nav ul li {
+      font-weight: 600;
+      font-size: 1.1rem;
+      user-select:none;
+      position: relative;
+    }
+    nav ul li:hover::after {
+      content:'';
+      position: absolute;
+      left:0;
+      bottom:-6px;
+      width: 100%;
+      height: 3px;
+      background: #f9d423;
+      border-radius: 2px;
+    }
+
+    /* Hero section */
+    .hero {
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow: 0 4px 24px rgba(255,210,35,0.7);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #eee;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+    }
+    .hero button {
+      font-size: 1.3rem;
+      padding: 14px 36px;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(255,210,35,0.6);
+      transition: box-shadow 0.3s ease;
+    }
+    .hero button:hover {
+      box-shadow: 0 6px 22px rgba(255,210,35,1);
+    }
+
+    /* Filters */
+    .filters {
+      margin: 2rem auto 3rem;
+      text-align: center;
+      max-width: 800px;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      user-select: none;
+    }
+    .filters button {
+      background: transparent;
+      color: #eee;
+      border: 2px solid #7158e2;
+      padding: 10px 24px;
+      font-weight: 600;
+      border-radius: 24px;
+      transition: all 0.3s ease;
+    }
+    .filters button.active,
+    .filters button:hover {
+      background: #7158e2;
+      border-color: #f9d423;
+      color: #fff;
+      box-shadow: 0 0 10px 2px #f9d423;
+    }
+
+    /* Search */
+    .search-container {
+      max-width: 400px;
+      margin: 0 auto 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    .search-container input {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: none;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(113,88,226,0.6);
+      transition: box-shadow 0.3s ease;
+      color: #222;
+    }
+    .search-container input::placeholder {
+      color: #999;
+    }
+    .search-container input:focus {
+      box-shadow: 0 2px 12px #f9d423cc;
+    }
+
+    /* Marketplace grid */
+    .marketplace {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+      gap: 2.5rem;
+    }
+
+    /* Product card */
+    .card {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      user-select: none;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      z-index: 5;
+    }
+    .card img {
+      border-radius: 16px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      user-select:none;
+    }
+    .card-content {
+      padding: 1rem 0 0.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffd93b;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 0 6px #ffcc33cc;
+    }
+    .seller {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 0.6rem;
+      font-style: italic;
+      user-select:none;
+    }
+    .price {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #f9d423;
+      margin-bottom: 1rem;
+      user-select:none;
+      text-shadow: 0 0 10px #f9d423aa;
+    }
+    .buy-button {
+      align-self: center;
+      margin-top: auto;
+      background: linear-gradient(45deg, #ff512f, #f09819);
+      box-shadow: 0 6px 14px #f09819cc;
+      font-weight: 700;
+      transition: box-shadow 0.3s ease;
+      border-radius: 12px;
+      padding: 12px 30px;
+      user-select:none;
+    }
+    .buy-button:hover {
+      box-shadow: 0 8px 25px #f09819ff;
+      background: linear-gradient(45deg, #f09819, #ff512f);
+    }
+
+    /* Badge for product type and seller premium */
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #f9d423;
+      color: #222;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      user-select:none;
+      box-shadow: 0 0 8px #f9d423cc;
+    }
+    .badge-seller {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #7158e2;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #7158e2aa;
+      user-select:none;
+    }
+    /* Modal */
+    .modal {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: #29233e;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 0 30px #7158e2aa;
+      position: relative;
+      color: #f9d423;
+      font-size: 1.1rem;
+      user-select:none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f9d423;
+      cursor: pointer;
+      user-select:none;
+      border: none;
+      background: transparent;
+      transition: color 0.3s ease;
+    }
+    .modal-close:hover {
+      color: #fff;
+    }
+    .modal-img {
+      border-radius: 14px;
+      width: 100%;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 18px #f9d423cc;
+    }
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      color: #ffd93b;
+      text-shadow: 0 0 10px #ffd93bcc;
+      user-select:none;
+    }
+    .modal-seller {
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: #ccc;
+    }
+    .modal-desc {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      color: #ddd;
+      user-select:none;
+    }
+    .modal-price {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: #f9d423;
+      margin-bottom: 1.5rem;
+      user-select:none;
+      text-shadow: 0 0 16px #f9d423dd;
+    }
+    .modal-buy-button {
+      background: linear-gradient(45deg, #ff512f, #f09819);
+      padding: 14px 40px;
+      font-weight: 900;
+      font-size: 1.2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px #f09819cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+      user-select:none;
+    }
+    .modal-buy-button:hover {
+      box-shadow: 0 10px 32px #f09819ff;
+      background: linear-gradient(45deg, #f09819, #ff512f);
+    }
+
+    /* Featured sellers section */
+    .featured-sellers {
+      background: rgba(20,18,40,0.85);
+      max-width: 1100px;
+      margin: auto;
+      border-radius: 24px;
+      padding: 2rem 1rem 3rem;
+      box-shadow: 0 0 30px #7158e2bb;
+      user-select:none;
+    }
+    .featured-sellers h2 {
+      text-align: center;
+      font-weight: 900;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #f9d423;
+      text-shadow: 0 0 12px #f9d423cc;
+    }
+    .seller-list {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .seller-item {
+      background: #7158e238;
+      border-radius: 16px;
+      text-align: center;
+      padding: 10px 12px;
+      flex: 0 0 140px;
+      box-shadow: 0 0 14px #7158e2aa;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+    .seller-item:hover {
+      background: #7158e270;
+    }
+    .seller-item img {
+      border-radius: 50%;
+      width: 72px;
+      height: 72px;
+      margin-bottom: 0.5rem;
+      border: 3px solid #f9d423;
+      box-shadow: 0 0 10px #f9d423bb;
+      user-select:none;
+    }
+    .seller-item h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffd93b;
+      margin: 0;
+      text-shadow: 0 0 6px #ffd93bcc;
+    }
+    .seller-item span {
+      color: #ddd;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+      }
+      nav ul {
+        gap: 1.1rem;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+      }
+      .marketplace {
+        grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+        gap: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h2>Свяжитесь с продавцом</h2>
+  <header>
+    <div class="logo" aria-label="Pay To Play">PaytoPlay</div>
+    <nav aria-label="Primary Navigation">
+      <ul>
+        <li><a href="#marketplace" tabindex="0">Магазин</a></li>
+        <li><a href="#featured-sellers" tabindex="0">Продавцы</a></li>
+        <li><a href="#contact" tabindex="0">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <form id="messageForm">
-        <label for="name">Ваше имя:</label><br>
-        <input type="text" id="name" name="name"><br><br>
+  <section class="hero" role="banner">
+    <h1>Лучший маркетплейс игр и донатов</h1>
+    <p>Покупайте игры и внутриигровые предметы от проверенных продавцов с безопасной оплатой и мгновенной доставкой.</p>
+    <button id="scroll-to-marketplace" aria-label="Перейти к магазину">Купить сейчас</button>
+  </section>
 
-        <label for="message">Ваш запрос:</label><br>
-        <textarea id="message" name="message"></textarea><br><br>
+  <section class="filters" role="region" aria-label="Фильтры товаров">
+    <button class="filter-btn active" data-filter="all" aria-pressed="true">Все</button>
+    <button class="filter-btn" data-filter="games" aria-pressed="false">Игры</button>
+    <button class="filter-btn" data-filter="donates" aria-pressed="false">Донаты</button>
+  </section>
 
-        <button type="button" onclick="sendDataToBot()">Отправить сообщение продавцу</button>
-    </form>
+  <section class="search-container" role="search">
+    <input type="search" id="search-input" placeholder="Поиск по товарам..." aria-label="Поиск по товарам" />
+  </section>
 
-    <script type="text/javascript">
-        function sendDataToBot() {
-            const name = document.getElementById("name").value;
-            const message = document.getElementById("message").value;
+  <main id="marketplace" class="marketplace" role="main" aria-live="polite">
+    <!-- Cards will be dynamically injected here -->
+  </main>
 
-            if (!name || !message) {
-                alert("Пожалуйста, заполните все поля.");
-                return;
-            }
+  <section id="featured-sellers" class="featured-sellers" role="region" aria-label="Избранные продавцы">
+    <h2>Избранные продавцы</h2>
+    <div class="seller-list" id="seller-list">
+      <!-- Sellers dynamically injected here -->
+    </div>
+  </section>
 
-            // Отправка данных через WebApp
-            Telegram.WebApp.sendData(JSON.stringify({
-                name: name,
-                message: message
-            }));
+  <footer id="contact" role="contentinfo" style="text-align:center; padding:2rem 1rem; color:#ccc; font-size:0.9rem; background:rgba(20,18,40,0.85); user-select:none;">
+    <p>© 2024 PaytoPlay. Все права защищены.</p>
+    <p>Контакты: пусто | Телефон: +99890 000 00 00</p>
+  </footer>
 
-            alert("Ваше сообщение отправлено продавцу.");
+  <!-- Modal -->
+  <div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title" tabindex="-1">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Закрыть">&times;</button>
+      <img src="" alt="" class="modal-img" />
+      <h3 id="modal-title" class="modal-title"></h3>
+      <p class="modal-seller"></p>
+      <p class="modal-desc"></p>
+      <p class="modal-price"></p>
+      <button class="modal-buy-button">Купить</button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const products = [
+        // Games
+        {
+          id: 1,
+          type: 'games',
+          title: 'Cyberpunk 2077',
+          seller: 'L',
+          sellerPremium: true,
+          price: 1299,
+          description: 'Футуристический RPG в открытом мире с потрясающей графикой.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg',
+        },{
+          id: 2,
+          type: 'games',
+          title: 'The Witcher 3: Wild Hunt',
+          seller: 'BestGamesShop',
+          sellerPremium: false,
+          price: 899,
+          description: 'Эпическая ролевая игра с открытым миром и глубокой историей.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg',
+        },{
+          id: 3,
+          type: 'games',
+          title: 'Minecraft',
+          seller: 'L',
+          sellerPremium: true,
+          price: 499,
+          description: 'Классическая песочница для творчества и приключений.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg',
+        },{
+          id: 4,
+          type: 'games',
+          title: 'Among Us',
+          seller: 'DonatesHub',
+          sellerPremium: false,
+          price: 299,
+          description: 'Социальная игра для многопользовательских миссий и обманов.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg',
+        },{
+          id: 5,
+          type: 'games',
+          title: 'Red Dead Redemption 2',
+          seller: 'EliteGames',
+          sellerPremium: true,
+          price: 1499,
+          description: 'Эпическая приключенческая игра про судьбу Дикого Запада.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg',
+        },{
+          id: 6,
+          type: 'games',
+          title: 'League of Legends',
+          seller: 'ProSellers',
+          sellerPremium: false,
+          price: 0,
+          description: 'Популярная MOBA игра с насыщенным геймплеем PvP.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg',
+        },{
+          id: 7,
+          type: 'games',
+          title: 'Valorant',
+          seller: 'DonatesHub',
+          sellerPremium: true,
+          price: 0,
+          description: 'Тактический шутер с командным игром и уникальными героями.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg',
+        },{
+          id: 8,
+          type: 'games',
+          title: 'Assassin’s Creed Valhalla',
+          seller: 'EliteGames',
+          sellerPremium: false,
+          price: 1599,
+          description: 'Погрузитесь в эпоху викингов и сражайтесь за свою славу.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1050720/header.jpg',
+        },{
+          id: 9,
+          type: 'games',
+          title: 'FIFA 23',
+          seller: 'SportsGames',
+          sellerPremium: true,
+          price: 2499,
+          description: 'Последняя версия популярной футбольной игры с улучшенной графикой и физикой.',
+          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1506830/header.jpg',
+        },
+        // Donates (in-game currencies)
+        {
+          id: 20,
+          type: 'donates',
+          title: '50,000 Gold Coins для WoW',
+          seller: 'DonatesHub',
+          sellerPremium: false,
+          price: 799,
+          description: 'Быстрое пополнение золотых монет в World of Warcraft без риска.',
+          image: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_01.jpg',
+        },{
+          id: 21,
+          type: 'donates',
+          title: '1000 Riot Points для LoL',
+          seller: 'ProSellers',
+          sellerPremium: true,
+          price: 1100,
+          description: 'Официальная валюта для покупок внутри League of Legends.',
+          image: 'https://upload.wikimedia.org/wikipedia/ru/thumb/7/7e/Lol_Riot_Point_icon.png/600px-Lol_Riot_Point_icon.png',
+        },{
+          id: 22,
+          type: 'donates',
+          title: '500 V-Bucks для Fortnite',
+          seller: 'DonatesHub',
+          sellerPremium: false,
+          price: 1500,
+          description: 'Внутриигровая валюта для Fortnite для покупки скинов и предметов.',
+          image: 'https://cdn2.unrealengine.com/Fortnite%2Fv-bucks_icon-256x256-00c6d09eabc43aafb0c0a2a046b5dfbc4e9ced6c.png',
+        },{
+          id: 23,
+          type: 'donates',
+          title: '2000 Platinum для Warframe',
+          seller: 'EliteGames',
+          sellerPremium: true,
+          price: 1900,
+          description: 'Премиальная валюта Warframe для покупки эксклюзивных предметов.',
+          image: 'https://cdn.warframe.com/wikiergea/images/7/7c/Plat_Icon.png',
+        },{
+          id: 24,
+          type: 'donates',
+          title: '10,000 Credits для Destiny 2',
+          seller: 'BestGamesShop',
+          sellerPremium: false,
+          price: 800,
+          description: 'Внутриигровая валюта для Destiny 2 для улучшения экипировки.',
+          image: 'https://progressdestiny2.com/content/images/icons/credits.png',
+        },{
+          id: 25,
+          type: 'donates',
+          title: '3000 Gold для Diablo 3',
+          seller: 'GameStoreX',
+          sellerPremium: true,
+          price: 1400,
+          description: 'Золотые монеты для Diablo 3 чтобы быстрее прокачаться.',
+          image: 'https://d3faen3y2p3u3z.cloudfront.net/style/diablo3/flame_textures/diablo3_icon_gold_64.png',
+        },{
+          id: 26,
+          type: 'donates',
+          title: '1000 Gems для Clash of Clans',
+          seller: 'ProSellers',
+          sellerPremium: false,
+          price: 1200,
+          description: 'Гемы для Clash of Clans для ускорения строительства и войн.',
+          image: 'https://vignette.wikia.nocookie.net/strategy/images/3/34/Clan_Gem_icon.png',
+        },
+      ];
+
+      const sellers = [
+        {
+          name: 'L',
+          premium: true,
+          avatar: 'https://i.pravatar.cc/72?img=3'
+        },{
+          name: 'BestGamesShop',
+          premium: false,
+          avatar: 'https://i.pravatar.cc/72?img=12'
+        },{
+          name: 'DonatesHub',
+          premium: false,
+          avatar: 'https://i.pravatar.cc/72?img=5'
+        },{
+          name: 'EliteGames',
+          premium: true,
+          avatar: 'https://i.pravatar.cc/72?img=7'
+        },{
+          name: 'ProSellers',
+          premium: true,
+          avatar: 'https://i.pravatar.cc/72?img=8'
+        },{
+          name: 'SportsGames',
+          premium: false,
+          avatar: 'https://i.pravatar.cc/72?img=9'
         }
-    </script>
+      ];
+
+      // Elements
+      const marketplaceEl = document.getElementById('marketplace');
+      const filters = document.querySelectorAll('.filter-btn');
+      const searchInput = document.getElementById('search-input');
+      const modal = document.getElementById('product-modal');
+      const modalCloseBtn = modal.querySelector('.modal-close');
+      const modalImg = modal.querySelector('.modal-img');
+      const modalTitle = modal.querySelector('.modal-title');
+      const modalSeller = modal.querySelector('.modal-seller');
+      const modalDesc = modal.querySelector('.modal-desc');
+      const modalPrice = modal.querySelector('.modal-price');
+      const modalBuyBtn = modal.querySelector('.modal-buy-button');
+      const scrollToMarketplaceBtn = document.getElementById('scroll-to-marketplace');
+      let activeFilter = 'all';
+
+      // Render sellers
+      function renderSellers() {
+        const sellerList = document.getElementById('seller-list');
+        sellerList.innerHTML = '';
+        for (const seller of sellers) {
+          const div = document.createElement('div');
+          div.classList.add('seller-item');
+          div.innerHTML = `
+            <img src="${seller.avatar}" alt="${seller.name} аватар" />
+            <h3>${seller.name}</h3>
+            <span>${seller.premium ? 'Премиум продавец' : 'Стандартный продавец'}</span>
+          `;
+          sellerList.appendChild(div);
+        }
+      }
+
+      // Create product card element
+      function createCard(product) {
+        const card = document.createElement('article');
+        card.classList.add('card');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `${product.title}, Продавец: ${product.seller}, цена ${product.price} рублей`);
+
+        let priceText = product.price > 0 ? product.price + ' руб.' : 'Бесплатно';
+
+        card.innerHTML = `
+          <span class="badge">${product.type === 'games' ? 'Игра' : 'Донат'}</span>
+          ${product.sellerPremium ? '<span class="badge-seller" title="Премиум продавец">Премиум</span>' : ''}
+          <img src="${product.image}" alt="${product.title} изображение" loading="lazy" />
+          <div class="card-content">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="seller">Продавец: ${product.seller}</p>
+            <p class="price">${priceText}</p>
+            <button class="buy-button" aria-label="Купить ${product.title}">Купить</button>
+          </div>
+        `;
+
+        // Open modal on card or buy button click
+        card.addEventListener('click', () => openModal(product));
+        card.querySelector('.buy-button').addEventListener('click', e => {
+          e.stopPropagation();
+          openModal(product);
+        });
+
+        return card;
+      }
+
+      // Render marketplace products with filtering and search
+      function renderMarketplace() {
+        let filtered = products.filter(p =>
+          (activeFilter === 'all' || p.type === activeFilter) &&
+          p.title.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+
+        marketplaceEl.innerHTML = '';
+        if (filtered.length === 0) {
+          marketplaceEl.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:#f9d423; font-weight:600;">Товары не найдены</p>`;
+          return;
+        }
+        for (const product of filtered) {
+          marketplaceEl.appendChild(createCard(product));
+        }
+      }
+
+      // Open modal with product details
+      function openModal(product) {
+        modalImg.src = product.image;
+        modalImg.alt = product.title + " изображение";
+        modalTitle.textContent = product.title;
+        modalSeller.textContent = 'Продавец: ' + product.seller + (product.sellerPremium ? ' (Премиум)' : '');
+        modalDesc.textContent = product.description;
+        modalPrice.textContent = product.price > 0 ? product.price + ' руб.' : 'Бесплатно';
+
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.focus();
+
+        // Buy button click - simulate purchase
+        modalBuyBtn.onclick = () => {
+          alert(`Спасибо за покупку: ${product.title}!\nСвяжитесь с продавцом ${product.seller} для получения товара.`);
+          closeModal();
+        };
+      }
+
+      // Close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        modalBuyBtn.onclick = null;
+      }
+
+      // Filter button handlers
+      filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filters.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          activeFilter = btn.dataset.filter;
+          renderMarketplace();
+        });
+      });
+
+      // Search input handler
+      searchInput.addEventListener('input', _ => {
+        renderMarketplace();
+      });
+
+      // Modal close handlers
+      modalCloseBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      // Scroll to marketplace
+      scrollToMarketplaceBtn.addEventListener('click', () => {
+        document.getElementById('marketplace').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Initialization
+      renderSellers();
+      renderMarketplace();
+
+    })();
+  </script>
 </body>
 </html>
+
