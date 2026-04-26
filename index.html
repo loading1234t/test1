@@ -1,3 +1,6 @@
+Вот ваш исправленный HTML-код. Я заменил ссылку на карту и добавил окно выбора между Google и Яндекс Картами при нажатии на кнопку локации.
+
+```html
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -280,7 +283,7 @@
         }
         .close-invitation:active { transform: scale(0.95); }
         
-        /* УКРАШЕНИЕ ЗВЁЗДАМИ И СТИКЕРАМИ (вместо силуэта мечети) */
+        /* УКРАШЕНИЕ ЗВЁЗДАМИ И СТИКЕРАМИ */
         .star-decoration {
             text-align: center;
             font-size: 1.3rem;
@@ -477,6 +480,59 @@
         .music-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #b27760; display: flex; align-items: center; justify-content: center; }
         .youtube-player { position: fixed; bottom: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
         
+        /* Стили для всплывающего окна выбора карты */
+        .map-choice-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .map-choice-card {
+            background: rgba(255,252,248,0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+            border: 1px solid rgba(200,165,135,0.3);
+            min-width: 280px;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+        .map-choice-card h3 {
+            font-family: 'Jost', sans-serif;
+            font-size: 1.2rem;
+            color: #674438;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+        .map-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            margin: 0.6rem 0;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .map-btn:active { transform: scale(0.97); }
+        .google-btn { background: rgba(66,133,244,0.12); color: #1a73e8; border: 1px solid rgba(66,133,244,0.3); }
+        .yandex-btn { background: rgba(255,50,50,0.08); color: #cc0000; border: 1px solid rgba(255,50,50,0.2); }
+        .cancel-map-btn { background: none; color: #a77a66; font-size: 0.75rem; margin-top: 0.3rem; }
+        
         @media (max-width: 500px) {
             .timer-cell { min-width: 60px; }
             .timer-number { font-size: 1.4rem; }
@@ -503,7 +559,7 @@
     <div class="moon-glow"></div>
     <div class="particles"></div>
     
-    <!-- 15 ОБЛАКОВ (те же) -->
+    <!-- 15 ОБЛАКОВ -->
     <div class="cloud-layer cloud-1 cloud-slow"><svg viewBox="0 0 750 450"><path d="M140,220 Q95,150 170,125 Q215,68 305,92 Q380,50 480,90 Q565,55 625,125 Q695,110 715,190 Q760,235 690,295 Q745,365 665,400 Q580,445 475,410 Q395,455 305,418 Q225,455 160,408 Q95,430 55,365 Q15,325 45,265 Q18,215 140,220Z" fill="#ffffff" opacity="0.95"/></svg></div>
     <div class="cloud-layer cloud-2 cloud-fast"><svg viewBox="0 0 850 500"><path d="M185,285 Q125,195 225,168 Q275,98 385,125 Q475,72 590,115 Q685,75 755,150 Q845,130 865,225 Q930,275 855,345 Q920,425 825,465 Q730,520 610,480 Q520,535 420,495 Q325,540 240,488 Q160,525 110,445 Q55,405 90,330 Q50,265 185,285Z" fill="#ffffff" opacity="0.95"/></svg></div>
     <div class="cloud-layer cloud-3 cloud-medium"><svg viewBox="0 0 600 360"><path d="M115,185 Q75,125 155,105 Q195,55 285,78 Q355,42 435,82 Q505,55 545,115 Q610,100 625,170 Q665,210 615,260 Q650,320 595,350 Q535,390 465,368 Q395,405 330,378 Q265,405 215,365 Q160,385 125,330 Q88,305 110,248 Q80,210 115,185Z" fill="#ffffff" opacity="0.95"/></svg></div>
@@ -530,7 +586,7 @@
         
         <div class="names-container">
             <div class="initials-large">L & M</div>
-            <div class="date-small">16 MAY 2026</div>
+            <div class="date-small">27 Iyun 2026</div>
         </div>
         <button class="open-btn" id="openBtn">Open Invitation</button>
     </div>
@@ -538,13 +594,13 @@
     <div class="full-invitation" id="fullInvitation">
         <div class="close-invitation" id="closeInvitationBtn">✕</div>
         <div class="invitation-inner">
-            <!-- КАРТОЧКА 1: A & X -->
+            <!-- КАРТОЧКА 1 -->
             <div class="invite-card">
                 <div class="flower-left"></div><div class="flower-right"></div>
                 <div class="star-decoration"></div>
                 <div style="font-size:2rem; text-align:center; font-family:'Great Vibes', cursive;">L & M</div>
                 <div style="margin-top:0.6rem; text-align:center; font-size:1rem;">27 Iyun 2026</div>
-                <div style="margin-top:0.2rem; text-align:center; font-size:0.8rem; color:#a77a66;">Piramit Tower · Istanbul</div>
+                <div style="margin-top:0.2rem; text-align:center; font-size:0.8rem; color:#a77a66;">To'y makoni · Qo'qon</div>
             </div>
             
             <!-- КАРТОЧКА 2: ПРИГЛАСИТЕЛЬНЫЙ ТЕКСТ -->
@@ -579,22 +635,22 @@
                 <div id="weddingDayMessage" style="display: none; text-align: center;">
                     <div class="welcome-text">
                         <p>Aziz mehmonlar!</p>
-                        <p>Bugun — 16-may 🤍</p>
+                        <p>Bugun — 27 Iyun 🤍</p>
                         <p>Bu bizning eng baxtli kunimiz.</p>
                         <p>Sizni 16:00 da boshlanadigan to‘yimizda kutamiz ✨</p>
                     </div>
                 </div>
             </div>
             
-            <!-- КАРТОЧКА 4: РЕСТОРАН SANTINI -->
+            <!-- КАРТОЧКА 4: ЛОКАЦИЯ -->
             <div class="invite-card">
                 <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="section-title">OQ OLTIN</div>
+                <div class="section-title">To'y makoni</div>
                 <div class="venue-photo">
-                    <img src="https://i.ibb.co/bRNbMS4V/unnamed.webp" alt="Santini Restaurant" loading="lazy" style="width:100%; height:auto; border-radius:28px;" onerror="this.src='https://placehold.co/600x400/f0e6dc/a77a66?text=Santini+Restaurant'">
+                    <img src="https://i.ibb.co/bRNbMS4V/unnamed.webp" alt="Wedding Venue" loading="lazy" style="width:100%; height:auto; border-radius:28px;" onerror="this.src='https://placehold.co/600x400/f0e6dc/a77a66?text=To+y+Makoni'">
                 </div>
                 <button class="location-btn" id="locationBtn">📍 Открыть локацию на карте →</button>
-                <div style="margin-top:0.8rem; font-size:0.7rem; text-align:center; color:#a77a66;">Ташкент, улица Каранкол, 88</div>
+                <div style="margin-top:0.8rem; font-size:0.7rem; text-align:center; color:#a77a66;">Qo'qon shahri, Shohruxobod ko'chasi, 1V</div>
             </div>
             
             <!-- КАРТОЧКА 5: ТЁПЛЫЙ ТЕКСТ ГОСТЯМ -->
@@ -608,21 +664,7 @@
                 </div>
             </div>
             
-            <!-- КАРТОЧКА 6: СВАДЕБНЫЙ КОНВЕРТ -->
-            <div class="invite-card gift-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="envelope-icon">✉️</div>
-                <div class="gift-title">Свадебный конверт</div>
-                <div class="gift-subtitle">для жениха и невесты</div>
-                <div class="bank-details">
-                    <p><strong>📱 Тойон (Kaspi Gold):</strong> <span id="kaspiNum">+7 777 123 45 67</span> <button class="copy-btn" data-copy="kaspiNum">📋</button></p>
-                    <p><strong>💳 Номер карты:</strong> <span id="cardNum">4400 1234 5678 9012</span> <button class="copy-btn" data-copy="cardNum">📋</button></p>
-                    <p><strong>🏦 Банк / Счет:</strong> <span id="iban">KZ86123KASPI987654321</span> <button class="copy-btn" data-copy="iban">📋</button></p>
-                </div>
-                <div class="gift-note">✨ Ваше тепло и внимание — лучший подарок. Если захотите порадовать нас, конверт с пожеланиями станет прекрасным знаком любви 💌</div>
-            </div>
-            
-            <!-- КАРТОЧКА 7: МОЛИТВА -->
+            <!-- КАРТОЧКА 6: МОЛИТВА -->
             <div class="invite-card">
                 <div class="flower-left"></div><div class="flower-right"></div>
                 <div class="star-decoration">✨ 🕌 ✨</div>
@@ -643,14 +685,14 @@
 </div>
 
 <script>
-    // ВСТАВЬТЕ ВАШУ ССЫЛКУ НА ФОТО
-    const photoURL = "https://i.postimg.cc/your-photo-link.jpg";
+    // ФОТО ДЛЯ ГЛАВНОГО ЭКРАНА (вставьте вашу ссылку)
+    const photoURL = "https://i.ibb.co/bRNbMS4V/unnamed.webp";
     const heroPhoto = document.getElementById('heroPhoto');
-    if (heroPhoto && photoURL && photoURL !== "https://i.postimg.cc/your-photo-link.jpg") {
+    if (heroPhoto && photoURL) {
         heroPhoto.src = photoURL;
     }
     
-    // ДАТА СВАДЬБЫ: 16 МАЯ 2026, 16:30 (месяц 4 = май)
+    // ДАТА СВАДЬБЫ: 27 ИЮНЯ 2026, 16:30 (месяц 5 = июнь)
     const targetDate = new Date(2026, 5, 27, 16, 30, 0).getTime();
     
     function updateTimer() {
@@ -714,6 +756,44 @@
         } 
     }
     
+    // ========== ВЫБОР КАРТЫ (GOOGLE или YANDEX) ==========
+    const googleMapsUrl = "https://maps.app.goo.gl/grvBoMDHNV6en5qH7";
+    const yandexMapsUrl = "https://yandex.uz/maps/-/CPGkz2nS";
+    
+    function showMapChoice() {
+        // Создаём overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'map-choice-overlay';
+        overlay.innerHTML = `
+            <div class="map-choice-card">
+                <h3>🗺️ Qaysi xaritada ochish?</h3>
+                <button class="map-btn google-btn" id="chooseGoogle">📍 Google Карты</button>
+                <button class="map-btn yandex-btn" id="chooseYandex">🗺️ Яндекс Карты</button>
+                <button class="map-btn cancel-map-btn" id="cancelMap">Bekor qilish</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        // Анимация появления
+        setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+        
+        // Обработчики
+        document.getElementById('chooseGoogle').onclick = () => {
+            window.open(googleMapsUrl, '_blank');
+            closeOverlay();
+        };
+        document.getElementById('chooseYandex').onclick = () => {
+            window.open(yandexMapsUrl, '_blank');
+            closeOverlay();
+        };
+        document.getElementById('cancelMap').onclick = () => closeOverlay();
+        
+        function closeOverlay() {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.remove(), 300);
+        }
+    }
+    
     const openingOverlay = document.getElementById('openingOverlay');
     const fullInvitation = document.getElementById('fullInvitation');
     const closeInvBtn = document.getElementById('closeInvitationBtn');
@@ -762,8 +842,9 @@
     closeInvBtn.addEventListener('click', () => fullInvitation.classList.remove('open'));
     musicToggleBtn.addEventListener('click', toggleMute);
     
+    // НОВАЯ ФУНКЦИЯ ДЛЯ КНОПКИ ЛОКАЦИИ - показывает выбор карты
     document.getElementById('locationBtn')?.addEventListener('click', () => {
-        window.open('https://yandex.ru/maps/org/santini/16569065793/', '_blank');
+        showMapChoice();
     });
     
     document.getElementById('rsvpConfirmBtn').addEventListener('click', () => { 
@@ -773,20 +854,6 @@
         document.body.appendChild(toast); 
         setTimeout(() => toast.style.opacity = '1', 10); 
         setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2500); 
-    });
-    
-    document.querySelectorAll('.copy-btn').forEach(btn => { 
-        btn.addEventListener('click', () => { 
-            const targetId = btn.getAttribute('data-copy'); 
-            const textToCopy = document.getElementById(targetId).innerText; 
-            navigator.clipboard.writeText(textToCopy); 
-            const toast = document.createElement('div'); 
-            toast.innerText = '✅ Скопировано!'; 
-            toast.style.cssText = 'position:fixed; bottom:90px; left:20px; right:20px; background:rgba(100,80,70,0.9); backdrop-filter:blur(16px); border-radius:40px; padding:0.5rem; text-align:center; font-size:0.7rem; color:#fff; z-index:300; opacity:0; transition:opacity 0.2s;'; 
-            document.body.appendChild(toast); 
-            setTimeout(() => toast.style.opacity = '1', 10); 
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 1200); 
-        }); 
     });
     
     const inviteScroll = document.getElementById('fullInvitation');
@@ -800,3 +867,4 @@
 </script>
 </body>
 </html>
+```
