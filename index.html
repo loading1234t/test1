@@ -1,857 +1,802 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Game & Donates Marketplace</title>
-  <style>
-    /* Reset & base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin:0; padding:0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      color: #eee;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    img {
-      display: block;
-      max-width: 100%;
-      border-radius: 12px;
-    }
-    button {
-      cursor: pointer;
-      border: none;
-      background-color: #7158e2;
-      color: white;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 8px;
-      transition: background-color 0.25s ease;
-    }
-    button:hover, button:focus {
-      background-color: #5a44b0;
-      outline: none;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>L & M | To‘y Taklifnomasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    /* Header */
-    header {
-      background: rgba(20,18,40,0.85);
-      backdrop-filter: saturate(180%) blur(16px);
-      padding: 1rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      background: linear-gradient(45deg, #ff4e50, #f9d423);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      user-select: none;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 6px rgba(255,255,255,0.1);
-    }
-    nav {
-    }
-    nav ul {
-      list-style:none;
-      display: flex;
-      gap: 2rem;
-      margin: 0; padding:0;
-    }
-    nav ul li {
-      font-weight: 600;
-      font-size: 1.1rem;
-      user-select:none;
-      position: relative;
-    }
-    nav ul li:hover::after {
-      content:'';
-      position: absolute;
-      left:0;
-      bottom:-6px;
-      width: 100%;
-      height: 3px;
-      background: #f9d423;
-      border-radius: 2px;
-    }
+        body {
+            background: #b8d4e2;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-    /* Hero section */
-    .hero {
-      padding: 4rem 2rem 6rem;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      color: white;
-      text-shadow: 0 4px 24px rgba(255,210,35,0.7);
-    }
-    .hero p {
-      font-size: 1.3rem;
-      font-weight: 400;
-      margin-bottom: 2rem;
-      color: #eee;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-    }
-    .hero button {
-      font-size: 1.3rem;
-      padding: 14px 36px;
-      font-weight: 700;
-      box-shadow: 0 6px 14px rgba(255,210,35,0.6);
-      transition: box-shadow 0.3s ease;
-    }
-    .hero button:hover {
-      box-shadow: 0 6px 22px rgba(255,210,35,1);
-    }
+        .app {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-    /* Filters */
-    .filters {
-      margin: 2rem auto 3rem;
-      text-align: center;
-      max-width: 800px;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      user-select: none;
-    }
-    .filters button {
-      background: transparent;
-      color: #eee;
-      border: 2px solid #7158e2;
-      padding: 10px 24px;
-      font-weight: 600;
-      border-radius: 24px;
-      transition: all 0.3s ease;
-    }
-    .filters button.active,
-    .filters button:hover {
-      background: #7158e2;
-      border-color: #f9d423;
-      color: #fff;
-      box-shadow: 0 0 10px 2px #f9d423;
-    }
+        .sky-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(145deg, #b0d4e8 0%, #c8e2f0 100%);
+            pointer-events: none;
+        }
 
-    /* Search */
-    .search-container {
-      max-width: 400px;
-      margin: 0 auto 3rem;
-      display: flex;
-      justify-content: center;
-    }
-    .search-container input {
-      width: 100%;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 30px;
-      border: none;
-      outline: none;
-      box-shadow: 0 2px 6px rgba(113,88,226,0.6);
-      transition: box-shadow 0.3s ease;
-      color: #222;
-    }
-    .search-container input::placeholder {
-      color: #999;
-    }
-    .search-container input:focus {
-      box-shadow: 0 2px 12px #f9d423cc;
-    }
+        /* ЛУННОЕ СВЕЧЕНИЕ */
+        .moon-glow {
+            position: fixed;
+            top: 8%;
+            right: 10%;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    /* Marketplace grid */
-    .marketplace {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 1rem 4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-      gap: 2.5rem;
-    }
+        /* МЕРЦАЮЩИЕ ЧАСТИЦЫ */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .particles::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.25;
+            animation: floatParticles 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes floatParticles {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-80px); }
+        }
 
-    /* Product card */
-    .card {
-      background: rgba(255 255 255 / 0.1);
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      user-select: none;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      z-index: 5;
-    }
-    .card img {
-      border-radius: 16px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      user-select:none;
-    }
-    .card-content {
-      padding: 1rem 0 0.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .product-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #ffd93b;
-      margin-bottom: 0.6rem;
-      text-shadow: 0 0 6px #ffcc33cc;
-    }
-    .seller {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 0.6rem;
-      font-style: italic;
-      user-select:none;
-    }
-    .price {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: #f9d423;
-      margin-bottom: 1rem;
-      user-select:none;
-      text-shadow: 0 0 10px #f9d423aa;
-    }
-    .buy-button {
-      align-self: center;
-      margin-top: auto;
-      background: linear-gradient(45deg, #ff512f, #f09819);
-      box-shadow: 0 6px 14px #f09819cc;
-      font-weight: 700;
-      transition: box-shadow 0.3s ease;
-      border-radius: 12px;
-      padding: 12px 30px;
-      user-select:none;
-    }
-    .buy-button:hover {
-      box-shadow: 0 8px 25px #f09819ff;
-      background: linear-gradient(45deg, #f09819, #ff512f);
-    }
+        /* ========== ОБЛАКА ========== */
+        .cloud-layer {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform;
+            opacity: 0.9 !important;
+            animation: floatRight 40s infinite linear;
+        }
+        .cloud-layer.cloud-slow { animation-duration: 55s; }
+        .cloud-layer.cloud-medium { animation-duration: 45s; }
+        .cloud-layer.cloud-fast { animation-duration: 32s; }
+        @keyframes floatRight {
+            0% { transform: translateX(-5%) translateY(0%); }
+            100% { transform: translateX(10%) translateY(2%); }
+        }
+        .cloud-1 { width: 750px; height: 450px; top: -15%; left: -25%; }
+        .cloud-2 { width: 850px; height: 500px; bottom: -15%; right: -28%; }
+        .cloud-3 { width: 600px; height: 360px; top: 5%; right: -10%; }
+        .cloud-4 { width: 700px; height: 420px; bottom: 5%; left: -30%; }
+        .cloud-5 { width: 550px; height: 330px; top: 35%; left: -5%; }
+        .cloud-6 { width: 650px; height: 390px; top: -5%; right: 5%; }
+        .cloud-7 { width: 580px; height: 350px; bottom: 20%; right: -15%; }
+        .cloud-8 { width: 520px; height: 310px; top: 25%; left: -18%; }
+        .cloud-9 { width: 500px; height: 300px; bottom: 30%; left: 10%; }
+        .cloud-10 { width: 680px; height: 410px; top: 55%; right: -5%; }
+        .cloud-11 { width: 480px; height: 290px; top: -2%; left: 20%; }
+        .cloud-12 { width: 720px; height: 430px; bottom: 40%; left: -22%; }
+        .cloud-13 { width: 540px; height: 320px; top: 70%; left: 25%; }
+        .cloud-14 { width: 600px; height: 360px; bottom: -5%; left: 15%; }
+        .cloud-15 { width: 530px; height: 320px; top: 12%; left: 45%; }
+        .cloud-layer svg { width: 100%; height: 100%; }
+        .cloud-layer svg path { fill: #ffffff !important; opacity: 0.95 !important; }
 
-    /* Badge for product type and seller premium */
-    .badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: #f9d423;
-      color: #222;
-      font-weight: 700;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 12px;
-      user-select:none;
-      box-shadow: 0 0 8px #f9d423cc;
-    }
-    .badge-seller {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #7158e2;
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.65rem;
-      padding: 2px 8px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #7158e2aa;
-      user-select:none;
-    }
-    /* Modal */
-    .modal {
-      position: fixed;
-      top:0; left:0; right:0; bottom:0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-content {
-      background: #29233e;
-      border-radius: 20px;
-      max-width: 600px;
-      width: 100%;
-      padding: 2rem;
-      box-shadow: 0 0 30px #7158e2aa;
-      position: relative;
-      color: #f9d423;
-      font-size: 1.1rem;
-      user-select:none;
-    }
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #f9d423;
-      cursor: pointer;
-      user-select:none;
-      border: none;
-      background: transparent;
-      transition: color 0.3s ease;
-    }
-    .modal-close:hover {
-      color: #fff;
-    }
-    .modal-img {
-      border-radius: 14px;
-      width: 100%;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 18px #f9d423cc;
-    }
-    .modal-title {
-      font-size: 2rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      color: #ffd93b;
-      text-shadow: 0 0 10px #ffd93bcc;
-      user-select:none;
-    }
-    .modal-seller {
-      font-style: italic;
-      margin-bottom: 1rem;
-      color: #ccc;
-    }
-    .modal-desc {
-      margin-bottom: 2rem;
-      line-height: 1.6;
-      color: #ddd;
-      user-select:none;
-    }
-    .modal-price {
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: #f9d423;
-      margin-bottom: 1.5rem;
-      user-select:none;
-      text-shadow: 0 0 16px #f9d423dd;
-    }
-    .modal-buy-button {
-      background: linear-gradient(45deg, #ff512f, #f09819);
-      padding: 14px 40px;
-      font-weight: 900;
-      font-size: 1.2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px #f09819cc;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease;
-      user-select:none;
-    }
-    .modal-buy-button:hover {
-      box-shadow: 0 10px 32px #f09819ff;
-      background: linear-gradient(45deg, #f09819, #ff512f);
-    }
-
-    /* Featured sellers section */
-    .featured-sellers {
-      background: rgba(20,18,40,0.85);
-      max-width: 1100px;
-      margin: auto;
-      border-radius: 24px;
-      padding: 2rem 1rem 3rem;
-      box-shadow: 0 0 30px #7158e2bb;
-      user-select:none;
-    }
-    .featured-sellers h2 {
-      text-align: center;
-      font-weight: 900;
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      color: #f9d423;
-      text-shadow: 0 0 12px #f9d423cc;
-    }
-    .seller-list {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    .seller-item {
-      background: #7158e238;
-      border-radius: 16px;
-      text-align: center;
-      padding: 10px 12px;
-      flex: 0 0 140px;
-      box-shadow: 0 0 14px #7158e2aa;
-      transition: background 0.3s ease;
-      cursor: default;
-    }
-    .seller-item:hover {
-      background: #7158e270;
-    }
-    .seller-item img {
-      border-radius: 50%;
-      width: 72px;
-      height: 72px;
-      margin-bottom: 0.5rem;
-      border: 3px solid #f9d423;
-      box-shadow: 0 0 10px #f9d423bb;
-      user-select:none;
-    }
-    .seller-item h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #ffd93b;
-      margin: 0;
-      text-shadow: 0 0 6px #ffd93bcc;
-    }
-    .seller-item span {
-      color: #ddd;
-      font-size: 0.85rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 1.5rem;
-      }
-      nav ul {
-        gap: 1.1rem;
-      }
-      .hero h1 {
-        font-size: 2.3rem;
-      }
-      .hero p {
-        font-size: 1.1rem;
-      }
-      .marketplace {
-        grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-        gap: 1.5rem;
-      }
-    }
-  </style>
+        .white-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%); pointer-events: none; }
+        
+        /* ========== ЭКРАН ВХОДА ========== */
+        .opening-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 45% 35%, #fff8f0 0%, #ffe8dc 100%);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            visibility: visible;
+            overflow: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .opening-overlay.hide { opacity: 0; visibility: hidden; }
+        
+        .hero-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 3px solid rgba(255,255,255,0.8);
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 0.8s ease forwards;
+        }
+        @keyframes fadeInScale {
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .names-container {
+            text-align: center;
+            z-index: 160;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .initials-large {
+            font-family: 'Great Vibes', 'Parisienne', cursive;
+            font-size: 4.2rem;
+            font-weight: 400;
+            color: #4a2c26;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+        .date-small {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #9b7666;
+            margin-top: 0.5rem;
+        }
+        
+        .open-btn {
+            background: rgba(255,252,248,0.94);
+            backdrop-filter: blur(12px);
+            border: 0.8px solid rgba(200,165,135,0.5);
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #7a5546;
+            cursor: pointer;
+            z-index: 160;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+        .open-btn:active {
+            transform: scale(0.96);
+            background: rgba(255,252,248,0.8);
+        }
+        
+        .anim-cloud {
+            position: absolute;
+            background: radial-gradient(ellipse at 35% 40%, rgba(255,255,255,1) 0%, rgba(255,250,245,1) 100%);
+            border-radius: 55% 45% 65% 35% / 40% 60% 40% 60%;
+            filter: blur(3px);
+            opacity: 0;
+            transform: scale(0.65);
+            will-change: transform, opacity;
+            pointer-events: none;
+            transition: all 2s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        .anim-cloud-1 { width: 580px; height: 350px; top: -5%; left: -35%; }
+        .anim-cloud-2 { width: 680px; height: 410px; bottom: -5%; right: -40%; }
+        .anim-cloud-3 { width: 500px; height: 300px; top: 22%; left: 35%; }
+        .anim-cloud-4 { width: 600px; height: 360px; top: 48%; left: -30%; }
+        .anim-cloud-5 { width: 470px; height: 280px; top: -8%; right: -5%; }
+        .anim-cloud-6 { width: 550px; height: 330px; bottom: 15%; left: -3%; }
+        .anim-cloud-7 { width: 500px; height: 300px; top: 8%; right: 8%; }
+        .anim-cloud-8 { width: 580px; height: 350px; bottom: 35%; right: -8%; }
+        .anim-cloud-9 { width: 480px; height: 290px; top: 58%; left: 18%; }
+        .anim-cloud-10 { width: 620px; height: 370px; top: 28%; right: -28%; }
+        .anim-cloud-11 { width: 490px; height: 295px; bottom: -2%; left: 25%; }
+        .anim-cloud-12 { width: 530px; height: 320px; top: 75%; right: 12%; }
+        
+        /* ========== ОСНОВНОЕ ПРИГЛАШЕНИЕ ========== */
+        .full-invitation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, rgba(255,250,245,0.88) 0%, rgba(254,242,230,0.9) 100%);
+            z-index: 200;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            padding: 1.8rem 1.2rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .full-invitation.open { opacity: 1; visibility: visible; }
+        .invitation-inner {
+            max-width: 450px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+            padding-bottom: 30px;
+        }
+        .full-invitation.open .invitation-inner { opacity: 1; transform: translateY(0); }
+        
+        .close-invitation {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,252,248,0.96);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 210;
+            border: 0.5px solid rgba(200,165,135,0.4);
+            color: #8b6b58;
+        }
+        .close-invitation:active { transform: scale(0.95); }
+        
+        /* УКРАШЕНИЕ ЗВЁЗДАМИ И СТИКЕРАМИ (вместо силуэта мечети) */
+        .star-decoration {
+            text-align: center;
+            font-size: 1.3rem;
+            letter-spacing: 0.3rem;
+            color: #b88a72;
+            opacity: 0.6;
+            margin: 10px 0;
+        }
+        
+        /* КАРТОЧКИ С ПЛАВНЫМ ПОЯВЛЕНИЕМ */
+        .invite-card {
+            background: rgba(255,252,248,0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 0.5px solid rgba(200,165,135,0.25);
+            position: relative;
+            transition: transform 0.15s ease;
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.6s ease;
+        }
+        .invite-card.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .invite-card:active { transform: scale(0.99); }
+        
+        .flower-left, .flower-right {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .flower-left { top: -5px; left: -5px; background: radial-gradient(circle, rgba(255,200,180,0.4) 0%, transparent 70%); border-radius: 50%; }
+        .flower-left::before { content: "🌹"; position: absolute; top: 8px; left: 8px; font-size: 1rem; }
+        .flower-right { bottom: -5px; right: -5px; background: radial-gradient(circle, rgba(200,180,220,0.3) 0%, transparent 70%); border-radius: 50%; }
+        .flower-right::before { content: "🌿"; position: absolute; bottom: 8px; right: 8px; font-size: 0.9rem; }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            text-align: center;
+            color: #674438;
+            margin-bottom: 1rem;
+        }
+        
+        .invitation-text {
+            text-align: center;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #5a3e36;
+            font-family: 'Jost', sans-serif;
+        }
+        .invitation-text p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #5a3e36;
+            font-family: 'Jost', sans-serif;
+        }
+        .welcome-text p {
+            margin-bottom: 0.8rem;
+        }
+        .welcome-heart {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            color: #b88a72;
+        }
+        
+        .arabic-prayer {
+            font-size: 1.1rem;
+            font-family: 'Amiri', 'Noto Sans Arabic', serif;
+            text-align: center;
+            color: #8b5a48;
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 1.2rem 0;
+            flex-wrap: wrap;
+        }
+        .timer-cell {
+            text-align: center;
+            background: rgba(255,252,248,0.7);
+            padding: 0.5rem 0.7rem;
+            border-radius: 28px;
+            min-width: 65px;
+        }
+        .timer-number { font-size: 1.6rem; font-weight: 500; color: #4f2d27; font-family: 'Jost', monospace; }
+        .timer-label { font-size: 0.55rem; letter-spacing: 0.1em; color: #a17363; }
+        
+        .venue-photo {
+            width: 100%;
+            border-radius: 32px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: #e8ddd2;
+        }
+        .venue-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+        }
+        .location-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(200,165,135,0.2);
+            border: 1px solid rgba(160,120,100,0.4);
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #7a5546;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        .location-btn:active { transform: scale(0.97); background: rgba(200,165,135,0.35); }
+        
+        .details-list { display: flex; flex-direction: column; gap: 0.8rem; }
+        .detail-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            padding-bottom: 0.5rem;
+            border-bottom: 0.5px solid rgba(160,120,100,0.15);
+        }
+        .detail-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #b2826e; }
+        
+        .gift-card { background: linear-gradient(135deg, rgba(255,248,240,0.9), rgba(255,242,232,0.95)); text-align: center; }
+        .gift-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: #8b5a48; margin-bottom: 0.3rem; }
+        .gift-subtitle { font-size: 0.75rem; color: #a77a66; margin-bottom: 0.8rem; }
+        .envelope-icon { font-size: 2rem; margin: 0.3rem 0; display: inline-block; }
+        .bank-details { background: rgba(255,252,248,0.6); border-radius: 28px; padding: 0.8rem; margin: 0.8rem 0; text-align: left; font-size: 0.7rem; }
+        .bank-details p { margin: 5px 0; color: #6b4a3a; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+        .bank-details strong { font-weight: 500; color: #8b5a48; }
+        .copy-btn { background: none; border: none; color: #b88a72; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
+        .gift-note { font-size: 0.65rem; color: #a77a66; margin-top: 0.5rem; font-style: italic; }
+        .rsvp-action {
+            background: rgba(250,240,230,0.92);
+            backdrop-filter: blur(10px);
+            border: 0.8px solid rgba(190,150,130,0.5);
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #6b443a;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .rsvp-action:active { transform: scale(0.98); }
+        
+        .music-controller {
+            position: fixed;
+            bottom: 20px;
+            right: 15px;
+            z-index: 250;
+            background: rgba(255,252,248,0.94);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.5px solid rgba(210,175,150,0.5);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .music-controller.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .music-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #b27760; display: flex; align-items: center; justify-content: center; }
+        .youtube-player { position: fixed; bottom: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+        
+        @media (max-width: 500px) {
+            .timer-cell { min-width: 60px; }
+            .timer-number { font-size: 1.4rem; }
+            .invite-card { padding: 1.2rem; }
+            .initials-large { font-size: 3.2rem; }
+            .hero-photo { width: 130px; height: 130px; }
+            .open-btn { padding: 0.7rem 2rem; font-size: 0.75rem; }
+            .invitation-text { font-size: 0.8rem; }
+            .welcome-text { font-size: 0.9rem; }
+            .arabic-prayer { font-size: 0.95rem; }
+            .star-decoration { font-size: 1rem; letter-spacing: 0.2rem; }
+        }
+        @media (max-width: 768px) {
+            .cloud-1, .cloud-2, .cloud-3, .cloud-4, .cloud-5, .cloud-6, .cloud-7, .cloud-8, .cloud-9, .cloud-10,
+            .cloud-11, .cloud-12, .cloud-13, .cloud-14, .cloud-15 { transform: scale(0.65); }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo" aria-label="Pay To Play">PaytoPlay</div>
-    <nav aria-label="Primary Navigation">
-      <ul>
-        <li><a href="#marketplace" tabindex="0">Магазин</a></li>
-        <li><a href="#featured-sellers" tabindex="0">Продавцы</a></li>
-        <li><a href="#contact" tabindex="0">Контакты</a></li>
-      </ul>
-    </nav>
-  </header>
+<div class="app">
+    <div class="sky-bg"></div>
+    <div class="white-glow"></div>
+    
+    <div class="moon-glow"></div>
+    <div class="particles"></div>
+    
+    <!-- 15 ОБЛАКОВ (те же) -->
+    <div class="cloud-layer cloud-1 cloud-slow"><svg viewBox="0 0 750 450"><path d="M140,220 Q95,150 170,125 Q215,68 305,92 Q380,50 480,90 Q565,55 625,125 Q695,110 715,190 Q760,235 690,295 Q745,365 665,400 Q580,445 475,410 Q395,455 305,418 Q225,455 160,408 Q95,430 55,365 Q15,325 45,265 Q18,215 140,220Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-2 cloud-fast"><svg viewBox="0 0 850 500"><path d="M185,285 Q125,195 225,168 Q275,98 385,125 Q475,72 590,115 Q685,75 755,150 Q845,130 865,225 Q930,275 855,345 Q920,425 825,465 Q730,520 610,480 Q520,535 420,495 Q325,540 240,488 Q160,525 110,445 Q55,405 90,330 Q50,265 185,285Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-3 cloud-medium"><svg viewBox="0 0 600 360"><path d="M115,185 Q75,125 155,105 Q195,55 285,78 Q355,42 435,82 Q505,55 545,115 Q610,100 625,170 Q665,210 615,260 Q650,320 595,350 Q535,390 465,368 Q395,405 330,378 Q265,405 215,365 Q160,385 125,330 Q88,305 110,248 Q80,210 115,185Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-4 cloud-slow"><svg viewBox="0 0 700 420"><path d="M160,245 Q110,170 200,145 Q245,82 345,108 Q425,62 525,105 Q605,72 660,140 Q740,122 758,208 Q810,255 745,320 Q800,395 720,435 Q635,485 525,450 Q445,495 350,458 Q270,495 200,448 Q135,475 92,405 Q48,365 78,295 Q45,240 160,245Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-5 cloud-fast"><svg viewBox="0 0 550 330"><path d="M98,172 Q68,118 145,100 Q185,58 268,82 Q332,48 405,85 Q470,58 505,118 Q558,102 570,162 Q605,198 565,242 Q598,298 550,325 Q498,358 432,338 Q368,365 310,338 Q252,358 212,322 Q172,340 148,292 Q118,268 138,218 Q112,188 98,172Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-6 cloud-medium"><svg viewBox="0 0 650 390"><path d="M125,205 Q82,145 165,122 Q208,72 295,95 Q365,58 445,92 Q515,62 560,125 Q630,108 645,180 Q690,222 638,272 Q678,330 622,360 Q562,400 495,375 Q425,412 360,382 Q295,410 242,372 Q188,392 148,340 Q112,318 135,262 Q108,228 125,205Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-7 cloud-slow"><svg viewBox="0 0 580 350"><path d="M108,195 Q72,132 150,112 Q192,65 278,88 Q348,52 422,85 Q488,58 528,115 Q592,100 608,165 Q648,205 598,252 Q632,312 578,342 Q518,378 452,355 Q385,388 325,358 Q265,382 222,345 Q175,365 138,312 Q102,290 125,235 Q98,205 108,195Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-8 cloud-fast"><svg viewBox="0 0 520 310"><path d="M98,178 Q65,120 142,102 Q182,60 262,84 Q325,50 395,86 Q455,58 492,112 Q548,98 560,155 Q598,192 555,238 Q588,290 540,318 Q488,348 428,328 Q368,355 312,328 Q258,348 218,312 Q178,330 152,282 Q122,260 142,212 Q118,185 98,178Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-9 cloud-medium"><svg viewBox="0 0 500 300"><path d="M92,165 Q62,110 135,92 Q172,55 248,76 Q312,45 382,80 Q442,55 478,108 Q530,95 542,150 Q575,185 535,225 Q565,278 520,302 Q472,332 418,315 Q362,338 312,315 Q262,332 225,300 Q188,318 162,272 Q135,250 155,205 Q132,182 92,165Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-10 cloud-slow"><svg viewBox="0 0 680 410"><path d="M135,225 Q90,155 175,132 Q220,75 315,100 Q390,60 478,98 Q555,68 608,132 Q685,115 702,198 Q755,245 690,310 Q750,385 670,420 Q585,470 478,438 Q398,480 310,445 Q235,480 170,438 Q108,460 70,395 Q30,358 58,290 Q28,240 135,225Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-11 cloud-fast"><svg viewBox="0 0 480 290"><path d="M85,148 Q58,98 128,82 Q165,48 235,70 Q295,42 362,78 Q418,55 448,105 Q498,92 508,145 Q538,178 498,218 Q525,268 482,292 Q438,322 382,305 Q328,325 278,305 Q228,322 192,290 Q158,308 135,262 Q112,242 130,198 Q108,175 85,148Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-12 cloud-medium"><svg viewBox="0 0 720 430"><path d="M170,255 Q118,180 210,155 Q255,95 360,120 Q448,78 555,118 Q645,82 708,155 Q798,138 818,230 Q878,280 805,352 Q872,435 785,475 Q690,530 575,495 Q490,545 390,505 Q305,550 225,498 Q148,530 105,455 Q55,415 88,340 Q50,285 170,255Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-13 cloud-slow"><svg viewBox="0 0 540 320"><path d="M105,185 Q72,128 150,110 Q192,68 275,92 Q340,58 412,94 Q475,68 512,122 Q568,108 580,168 Q615,205 572,248 Q602,305 558,332 Q508,365 452,345 Q395,370 340,345 Q285,365 248,330 Q212,348 188,300 Q158,278 178,230 Q155,205 105,185Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-14 cloud-fast"><svg viewBox="0 0 600 360"><path d="M120,198 Q82,140 162,120 Q202,76 288,98 Q355,62 428,96 Q495,68 535,122 Q598,108 612,172 Q652,210 608,258 Q640,312 592,342 Q538,378 478,358 Q418,388 360,358 Q305,378 268,342 Q230,360 200,312 Q172,290 192,242 Q168,218 120,198Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-15 cloud-medium"><svg viewBox="0 0 530 320"><path d="M95,168 Q65,112 135,95 Q172,58 248,80 Q312,50 382,84 Q442,60 475,112 Q528,100 540,155 Q572,190 535,232 Q562,282 520,308 Q472,338 418,320 Q362,342 312,320 Q262,338 225,306 Q188,322 162,278 Q135,256 155,212 Q132,190 95,168Z" fill="#ffffff" opacity="0.95"/></svg></div>
 
-  <section class="hero" role="banner">
-    <h1>Лучший маркетплейс игр и донатов</h1>
-    <p>Покупайте игры и внутриигровые предметы от проверенных продавцов с безопасной оплатой и мгновенной доставкой.</p>
-    <button id="scroll-to-marketplace" aria-label="Перейти к магазину">Купить сейчас</button>
-  </section>
-
-  <section class="filters" role="region" aria-label="Фильтры товаров">
-    <button class="filter-btn active" data-filter="all" aria-pressed="true">Все</button>
-    <button class="filter-btn" data-filter="games" aria-pressed="false">Игры</button>
-    <button class="filter-btn" data-filter="donates" aria-pressed="false">Донаты</button>
-  </section>
-
-  <section class="search-container" role="search">
-    <input type="search" id="search-input" placeholder="Поиск по товарам..." aria-label="Поиск по товарам" />
-  </section>
-
-  <main id="marketplace" class="marketplace" role="main" aria-live="polite">
-    <!-- Cards will be dynamically injected here -->
-  </main>
-
-  <section id="featured-sellers" class="featured-sellers" role="region" aria-label="Избранные продавцы">
-    <h2>Избранные продавцы</h2>
-    <div class="seller-list" id="seller-list">
-      <!-- Sellers dynamically injected here -->
+    <div class="opening-overlay" id="openingOverlay">
+        <div class="anim-cloud anim-cloud-1"></div><div class="anim-cloud anim-cloud-2"></div><div class="anim-cloud anim-cloud-3"></div>
+        <div class="anim-cloud anim-cloud-4"></div><div class="anim-cloud anim-cloud-5"></div><div class="anim-cloud anim-cloud-6"></div>
+        <div class="anim-cloud anim-cloud-7"></div><div class="anim-cloud anim-cloud-8"></div><div class="anim-cloud anim-cloud-9"></div>
+        <div class="anim-cloud anim-cloud-10"></div><div class="anim-cloud anim-cloud-11"></div><div class="anim-cloud anim-cloud-12"></div>
+        
+        <img class="hero-photo" id="heroPhoto" src="" alt="L & M" onerror="this.style.display='none'">
+        
+        <div class="names-container">
+            <div class="initials-large">L & M</div>
+            <div class="date-small">16 MAY 2026</div>
+        </div>
+        <button class="open-btn" id="openBtn">Open Invitation</button>
     </div>
-  </section>
 
-  <footer id="contact" role="contentinfo" style="text-align:center; padding:2rem 1rem; color:#ccc; font-size:0.9rem; background:rgba(20,18,40,0.85); user-select:none;">
-    <p>© 2024 PaytoPlay. Все права защищены.</p>
-    <p>Контакты: пусто | Телефон: +99890 000 00 00</p>
-  </footer>
-
-  <!-- Modal -->
-  <div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title" tabindex="-1">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Закрыть">&times;</button>
-      <img src="" alt="" class="modal-img" />
-      <h3 id="modal-title" class="modal-title"></h3>
-      <p class="modal-seller"></p>
-      <p class="modal-desc"></p>
-      <p class="modal-price"></p>
-      <button class="modal-buy-button">Купить</button>
+    <div class="full-invitation" id="fullInvitation">
+        <div class="close-invitation" id="closeInvitationBtn">✕</div>
+        <div class="invitation-inner">
+            <!-- КАРТОЧКА 1: A & X -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="star-decoration"></div>
+                <div style="font-size:2rem; text-align:center; font-family:'Great Vibes', cursive;">L & M</div>
+                <div style="margin-top:0.6rem; text-align:center; font-size:1rem;">16 MAY 2026</div>
+                <div style="margin-top:0.2rem; text-align:center; font-size:0.8rem; color:#a77a66;">Piramit Tower · Istanbul</div>
+            </div>
+            
+            <!-- КАРТОЧКА 2: ПРИГЛАСИТЕЛЬНЫЙ ТЕКСТ -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="star-decoration"></div>
+                <div class="invitation-text">
+                    <p>Allohning marhamati bilan</p>
+                    <p><strong>L & M</strong> ning nikoh to‘yi munosabati bilan<br>
+                    Sizni ushbu quvonchli kunga taklif etamiz.</p>
+                    <p>Sizning tashrifingiz biz uchun katta sharaf bo‘ladi.<br>
+                    Aziz mehmonimiz sifatida sizni kutib qolamiz.</p>
+                    <p>Alloh taolo oilamizga baraka ato etishini<br>
+                    va ushbu kunni hayrli qilishini tilaymiz.</p>
+                    <p><em>Hurmat bilan,<br>Oila</em></p>
+                </div>
+                <div class="star-decoration"></div>
+            </div>
+            
+            <!-- КАРТОЧКА 3: ТАЙМЕР -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="section-title" style="font-size:1.3rem;">До нашей свадьбы</div>
+                
+                <div id="timerGrid" class="timer-grid">
+                    <div class="timer-cell"><div class="timer-number" id="daysCount">00</div><div class="timer-label">ДНЕЙ</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="hoursCount">00</div><div class="timer-label">ЧАСОВ</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="minutesCount">00</div><div class="timer-label">МИНУТ</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="secondsCount">00</div><div class="timer-label">СЕКУНД</div></div>
+                </div>
+                
+                <div id="weddingDayMessage" style="display: none; text-align: center;">
+                    <div class="welcome-text">
+                        <p>Aziz mehmonlar!</p>
+                        <p>Bugun — 16-may 🤍</p>
+                        <p>Bu bizning eng baxtli kunimiz.</p>
+                        <p>Sizni 16:00 da boshlanadigan to‘yimizda kutamiz ✨</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- КАРТОЧКА 4: РЕСТОРАН SANTINI -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="section-title">Ресторан Santini</div>
+                <div class="venue-photo">
+                    <img src="https://i.postimg.cc/5NvzBMZm/k21k2.webp" alt="Santini Restaurant" loading="lazy" style="width:100%; height:auto; border-radius:28px;" onerror="this.src='https://placehold.co/600x400/f0e6dc/a77a66?text=Santini+Restaurant'">
+                </div>
+                <button class="location-btn" id="locationBtn">📍 Открыть локацию на карте →</button>
+                <div style="margin-top:0.8rem; font-size:0.7rem; text-align:center; color:#a77a66;">Ташкент, улица Каранкол, 88</div>
+            </div>
+            
+            <!-- КАРТОЧКА 5: ТЁПЛЫЙ ТЕКСТ ГОСТЯМ -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="welcome-text">
+                    <p>Aziz mehmonlar!</p>
+                    <p>Sizning kelib ishtirok etishingiz<br>
+                    biz uchun faqat taklif emas — qalb quvonchidir.</p>
+                    <p>Biz sizni 16:00 da intizorlik bilan kutamiz 🤍</p>
+                </div>
+            </div>
+            
+            <!-- КАРТОЧКА 6: СВАДЕБНЫЙ КОНВЕРТ -->
+            <div class="invite-card gift-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="envelope-icon">✉️</div>
+                <div class="gift-title">Свадебный конверт</div>
+                <div class="gift-subtitle">для жениха и невесты</div>
+                <div class="bank-details">
+                    <p><strong>📱 Тойон (Kaspi Gold):</strong> <span id="kaspiNum">+7 777 123 45 67</span> <button class="copy-btn" data-copy="kaspiNum">📋</button></p>
+                    <p><strong>💳 Номер карты:</strong> <span id="cardNum">4400 1234 5678 9012</span> <button class="copy-btn" data-copy="cardNum">📋</button></p>
+                    <p><strong>🏦 Банк / Счет:</strong> <span id="iban">KZ86123KASPI987654321</span> <button class="copy-btn" data-copy="iban">📋</button></p>
+                </div>
+                <div class="gift-note">✨ Ваше тепло и внимание — лучший подарок. Если захотите порадовать нас, конверт с пожеланиями станет прекрасным знаком любви 💌</div>
+            </div>
+            
+            <!-- КАРТОЧКА 7: МОЛИТВА -->
+            <div class="invite-card">
+                <div class="flower-left"></div><div class="flower-right"></div>
+                <div class="star-decoration">✨ 🕌 ✨</div>
+                <div class="arabic-prayer">
+                    Allohumma barik lahuma<br>
+                    wa barik alayhima<br>
+                    wa jma’ baynahuma fi khayr
+                </div>
+                <div class="star-decoration">✨ 🕌 ✨</div>
+            </div>
+            
+            <button class="rsvp-action" id="rsvpConfirmBtn">Подтвердить присутствие</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    (() => {
-      const products = [
-        // Games
-        {
-          id: 1,
-          type: 'games',
-          title: 'Cyberpunk 2077',
-          seller: 'L',
-          sellerPremium: true,
-          price: 1299,
-          description: 'Футуристический RPG в открытом мире с потрясающей графикой.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg',
-        },{
-          id: 2,
-          type: 'games',
-          title: 'The Witcher 3: Wild Hunt',
-          seller: 'BestGamesShop',
-          sellerPremium: false,
-          price: 899,
-          description: 'Эпическая ролевая игра с открытым миром и глубокой историей.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg',
-        },{
-          id: 3,
-          type: 'games',
-          title: 'Minecraft',
-          seller: 'L',
-          sellerPremium: true,
-          price: 499,
-          description: 'Классическая песочница для творчества и приключений.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg',
-        },{
-          id: 4,
-          type: 'games',
-          title: 'Among Us',
-          seller: 'DonatesHub',
-          sellerPremium: false,
-          price: 299,
-          description: 'Социальная игра для многопользовательских миссий и обманов.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg',
-        },{
-          id: 5,
-          type: 'games',
-          title: 'Red Dead Redemption 2',
-          seller: 'EliteGames',
-          sellerPremium: true,
-          price: 1499,
-          description: 'Эпическая приключенческая игра про судьбу Дикого Запада.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg',
-        },{
-          id: 6,
-          type: 'games',
-          title: 'League of Legends',
-          seller: 'ProSellers',
-          sellerPremium: false,
-          price: 0,
-          description: 'Популярная MOBA игра с насыщенным геймплеем PvP.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/359550/header.jpg',
-        },{
-          id: 7,
-          type: 'games',
-          title: 'Valorant',
-          seller: 'DonatesHub',
-          sellerPremium: true,
-          price: 0,
-          description: 'Тактический шутер с командным игром и уникальными героями.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg',
-        },{
-          id: 8,
-          type: 'games',
-          title: 'Assassin’s Creed Valhalla',
-          seller: 'EliteGames',
-          sellerPremium: false,
-          price: 1599,
-          description: 'Погрузитесь в эпоху викингов и сражайтесь за свою славу.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1050720/header.jpg',
-        },{
-          id: 9,
-          type: 'games',
-          title: 'FIFA 23',
-          seller: 'SportsGames',
-          sellerPremium: true,
-          price: 2499,
-          description: 'Последняя версия популярной футбольной игры с улучшенной графикой и физикой.',
-          image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1506830/header.jpg',
-        },
-        // Donates (in-game currencies)
-        {
-          id: 20,
-          type: 'donates',
-          title: '50,000 Gold Coins для WoW',
-          seller: 'DonatesHub',
-          sellerPremium: false,
-          price: 799,
-          description: 'Быстрое пополнение золотых монет в World of Warcraft без риска.',
-          image: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_01.jpg',
-        },{
-          id: 21,
-          type: 'donates',
-          title: '1000 Riot Points для LoL',
-          seller: 'ProSellers',
-          sellerPremium: true,
-          price: 1100,
-          description: 'Официальная валюта для покупок внутри League of Legends.',
-          image: 'https://upload.wikimedia.org/wikipedia/ru/thumb/7/7e/Lol_Riot_Point_icon.png/600px-Lol_Riot_Point_icon.png',
-        },{
-          id: 22,
-          type: 'donates',
-          title: '500 V-Bucks для Fortnite',
-          seller: 'DonatesHub',
-          sellerPremium: false,
-          price: 1500,
-          description: 'Внутриигровая валюта для Fortnite для покупки скинов и предметов.',
-          image: 'https://cdn2.unrealengine.com/Fortnite%2Fv-bucks_icon-256x256-00c6d09eabc43aafb0c0a2a046b5dfbc4e9ced6c.png',
-        },{
-          id: 23,
-          type: 'donates',
-          title: '2000 Platinum для Warframe',
-          seller: 'EliteGames',
-          sellerPremium: true,
-          price: 1900,
-          description: 'Премиальная валюта Warframe для покупки эксклюзивных предметов.',
-          image: 'https://cdn.warframe.com/wikiergea/images/7/7c/Plat_Icon.png',
-        },{
-          id: 24,
-          type: 'donates',
-          title: '10,000 Credits для Destiny 2',
-          seller: 'BestGamesShop',
-          sellerPremium: false,
-          price: 800,
-          description: 'Внутриигровая валюта для Destiny 2 для улучшения экипировки.',
-          image: 'https://progressdestiny2.com/content/images/icons/credits.png',
-        },{
-          id: 25,
-          type: 'donates',
-          title: '3000 Gold для Diablo 3',
-          seller: 'GameStoreX',
-          sellerPremium: true,
-          price: 1400,
-          description: 'Золотые монеты для Diablo 3 чтобы быстрее прокачаться.',
-          image: 'https://d3faen3y2p3u3z.cloudfront.net/style/diablo3/flame_textures/diablo3_icon_gold_64.png',
-        },{
-          id: 26,
-          type: 'donates',
-          title: '1000 Gems для Clash of Clans',
-          seller: 'ProSellers',
-          sellerPremium: false,
-          price: 1200,
-          description: 'Гемы для Clash of Clans для ускорения строительства и войн.',
-          image: 'https://vignette.wikia.nocookie.net/strategy/images/3/34/Clan_Gem_icon.png',
-        },
-      ];
+    <div class="youtube-player"><iframe id="youtubeAudio" width="1" height="1" src="" allow="autoplay; encrypted-media" style="border:0"></iframe></div>
+    <div class="music-controller" id="musicController"><button class="music-btn" id="musicToggleBtn">🔇</button></div>
+</div>
 
-      const sellers = [
-        {
-          name: 'L',
-          premium: true,
-          avatar: 'https://i.pravatar.cc/72?img=3'
-        },{
-          name: 'BestGamesShop',
-          premium: false,
-          avatar: 'https://i.pravatar.cc/72?img=12'
-        },{
-          name: 'DonatesHub',
-          premium: false,
-          avatar: 'https://i.pravatar.cc/72?img=5'
-        },{
-          name: 'EliteGames',
-          premium: true,
-          avatar: 'https://i.pravatar.cc/72?img=7'
-        },{
-          name: 'ProSellers',
-          premium: true,
-          avatar: 'https://i.pravatar.cc/72?img=8'
-        },{
-          name: 'SportsGames',
-          premium: false,
-          avatar: 'https://i.pravatar.cc/72?img=9'
+<script>
+    // ВСТАВЬТЕ ВАШУ ССЫЛКУ НА ФОТО
+    const photoURL = "https://i.postimg.cc/your-photo-link.jpg";
+    const heroPhoto = document.getElementById('heroPhoto');
+    if (heroPhoto && photoURL && photoURL !== "https://i.postimg.cc/your-photo-link.jpg") {
+        heroPhoto.src = photoURL;
+    }
+    
+    // ДАТА СВАДЬБЫ: 16 МАЯ 2026, 16:30 (месяц 4 = май)
+    const targetDate = new Date(2026, 4, 16, 16, 30, 0).getTime();
+    
+    function updateTimer() {
+        const now = Date.now();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) { 
+            document.getElementById('timerGrid').style.display = 'none';
+            document.getElementById('weddingDayMessage').style.display = 'block';
+            return; 
         }
-      ];
-
-      // Elements
-      const marketplaceEl = document.getElementById('marketplace');
-      const filters = document.querySelectorAll('.filter-btn');
-      const searchInput = document.getElementById('search-input');
-      const modal = document.getElementById('product-modal');
-      const modalCloseBtn = modal.querySelector('.modal-close');
-      const modalImg = modal.querySelector('.modal-img');
-      const modalTitle = modal.querySelector('.modal-title');
-      const modalSeller = modal.querySelector('.modal-seller');
-      const modalDesc = modal.querySelector('.modal-desc');
-      const modalPrice = modal.querySelector('.modal-price');
-      const modalBuyBtn = modal.querySelector('.modal-buy-button');
-      const scrollToMarketplaceBtn = document.getElementById('scroll-to-marketplace');
-      let activeFilter = 'all';
-
-      // Render sellers
-      function renderSellers() {
-        const sellerList = document.getElementById('seller-list');
-        sellerList.innerHTML = '';
-        for (const seller of sellers) {
-          const div = document.createElement('div');
-          div.classList.add('seller-item');
-          div.innerHTML = `
-            <img src="${seller.avatar}" alt="${seller.name} аватар" />
-            <h3>${seller.name}</h3>
-            <span>${seller.premium ? 'Премиум продавец' : 'Стандартный продавец'}</span>
-          `;
-          sellerList.appendChild(div);
-        }
-      }
-
-      // Create product card element
-      function createCard(product) {
-        const card = document.createElement('article');
-        card.classList.add('card');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('role', 'button');
-        card.setAttribute('aria-label', `${product.title}, Продавец: ${product.seller}, цена ${product.price} рублей`);
-
-        let priceText = product.price > 0 ? product.price + ' руб.' : 'Бесплатно';
-
-        card.innerHTML = `
-          <span class="badge">${product.type === 'games' ? 'Игра' : 'Донат'}</span>
-          ${product.sellerPremium ? '<span class="badge-seller" title="Премиум продавец">Премиум</span>' : ''}
-          <img src="${product.image}" alt="${product.title} изображение" loading="lazy" />
-          <div class="card-content">
-            <h3 class="product-title">${product.title}</h3>
-            <p class="seller">Продавец: ${product.seller}</p>
-            <p class="price">${priceText}</p>
-            <button class="buy-button" aria-label="Купить ${product.title}">Купить</button>
-          </div>
-        `;
-
-        // Open modal on card or buy button click
-        card.addEventListener('click', () => openModal(product));
-        card.querySelector('.buy-button').addEventListener('click', e => {
-          e.stopPropagation();
-          openModal(product);
+        
+        document.getElementById('timerGrid').style.display = 'flex';
+        document.getElementById('weddingDayMessage').style.display = 'none';
+        
+        const days = Math.floor(diff / (1000*60*60*24));
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        
+        document.getElementById('daysCount').innerHTML = days < 10 ? '0'+days : days;
+        document.getElementById('hoursCount').innerHTML = hours < 10 ? '0'+hours : hours;
+        document.getElementById('minutesCount').innerHTML = minutes < 10 ? '0'+minutes : minutes;
+        document.getElementById('secondsCount').innerHTML = seconds < 10 ? '0'+seconds : seconds;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+    
+    // ПЛАВНОЕ ПОЯВЛЕНИЕ КАРТОЧЕК ПРИ СКРОЛЛЕ
+    const cards = document.querySelectorAll('.invite-card');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('show');
+            }
         });
-
-        return card;
-      }
-
-      // Render marketplace products with filtering and search
-      function renderMarketplace() {
-        let filtered = products.filter(p =>
-          (activeFilter === 'all' || p.type === activeFilter) &&
-          p.title.toLowerCase().includes(searchInput.value.toLowerCase())
-        );
-
-        marketplaceEl.innerHTML = '';
-        if (filtered.length === 0) {
-          marketplaceEl.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:#f9d423; font-weight:600;">Товары не найдены</p>`;
-          return;
-        }
-        for (const product of filtered) {
-          marketplaceEl.appendChild(createCard(product));
-        }
-      }
-
-      // Open modal with product details
-      function openModal(product) {
-        modalImg.src = product.image;
-        modalImg.alt = product.title + " изображение";
-        modalTitle.textContent = product.title;
-        modalSeller.textContent = 'Продавец: ' + product.seller + (product.sellerPremium ? ' (Премиум)' : '');
-        modalDesc.textContent = product.description;
-        modalPrice.textContent = product.price > 0 ? product.price + ' руб.' : 'Бесплатно';
-
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-        modal.focus();
-
-        // Buy button click - simulate purchase
-        modalBuyBtn.onclick = () => {
-          alert(`Спасибо за покупку: ${product.title}!\nСвяжитесь с продавцом ${product.seller} для получения товара.`);
-          closeModal();
-        };
-      }
-
-      // Close modal
-      function closeModal() {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-        modalBuyBtn.onclick = null;
-      }
-
-      // Filter button handlers
-      filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filters.forEach(b => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
-          });
-          btn.classList.add('active');
-          btn.setAttribute('aria-pressed', 'true');
-          activeFilter = btn.dataset.filter;
-          renderMarketplace();
+    }, { threshold: 0.2 });
+    cards.forEach(c => observer.observe(c));
+    
+    // МУЗЫКА
+    const youtubeIframe = document.getElementById('youtubeAudio');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    let musicStarted = false, isMuted = false;
+    function startMusic() { 
+        if (musicStarted) return; 
+        musicStarted = true; 
+        youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=0&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
+        musicToggleBtn.innerHTML = '🔊'; 
+        isMuted = false; 
+    }
+    function toggleMute() { 
+        if (!musicStarted) { startMusic(); return; } 
+        if (isMuted) { 
+            youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=0&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
+            musicToggleBtn.innerHTML = '🔊'; 
+            isMuted = false; 
+        } else { 
+            youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=1&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
+            musicToggleBtn.innerHTML = '🔇'; 
+            isMuted = true; 
+        } 
+    }
+    
+    const openingOverlay = document.getElementById('openingOverlay');
+    const fullInvitation = document.getElementById('fullInvitation');
+    const closeInvBtn = document.getElementById('closeInvitationBtn');
+    const musicController = document.getElementById('musicController');
+    const openBtn = document.getElementById('openBtn');
+    
+    setTimeout(() => { musicController.classList.add('active'); }, 1500);
+    
+    let isOpening = false;
+    
+    openBtn.addEventListener('click', function(e) {
+        if (isOpening) return;
+        isOpening = true;
+        startMusic();
+        
+        const animClouds = document.querySelectorAll('.anim-cloud');
+        const directions = [
+            'translateX(-620px) translateY(-280px) scale(2.8)', 
+            'translateX(680px) translateY(300px) scale(2.9)', 
+            'translateX(500px) translateY(-350px) scale(2.7)', 
+            'translateX(-580px) translateY(420px) scale(2.8)', 
+            'translateX(420px) translateY(-220px) scale(2.6)', 
+            'translateX(-480px) translateY(-180px) scale(2.7)', 
+            'translateX(580px) translateY(260px) scale(2.8)', 
+            'translateX(-620px) translateY(340px) scale(2.7)', 
+            'translateX(360px) translateY(-450px) scale(2.6)', 
+            'translateX(640px) translateY(-240px) scale(2.7)', 
+            'translateX(-420px) translateY(480px) scale(2.7)', 
+            'translateX(340px) translateY(420px) scale(2.6)'
+        ];
+        animClouds.forEach((cloud, idx) => { 
+            setTimeout(() => { 
+                cloud.style.transition = 'all 2s cubic-bezier(0.33, 1, 0.68, 1)'; 
+                cloud.style.opacity = '1'; 
+                cloud.style.transform = directions[idx]; 
+                setTimeout(() => { cloud.style.opacity = '0'; }, 1800); 
+            }, idx * 30); 
         });
-      });
-
-      // Search input handler
-      searchInput.addEventListener('input', _ => {
-        renderMarketplace();
-      });
-
-      // Modal close handlers
-      modalCloseBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', e => {
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          closeModal();
-        }
-      });
-
-      // Scroll to marketplace
-      scrollToMarketplaceBtn.addEventListener('click', () => {
-        document.getElementById('marketplace').scrollIntoView({ behavior: 'smooth' });
-      });
-
-      // Initialization
-      renderSellers();
-      renderMarketplace();
-
-    })();
-  </script>
+        
+        setTimeout(() => {
+            openingOverlay.classList.add('hide');
+            fullInvitation.classList.add('open');
+        }, 2000);
+    });
+    
+    closeInvBtn.addEventListener('click', () => fullInvitation.classList.remove('open'));
+    musicToggleBtn.addEventListener('click', toggleMute);
+    
+    document.getElementById('locationBtn')?.addEventListener('click', () => {
+        window.open('https://yandex.ru/maps/org/santini/16569065793/', '_blank');
+    });
+    
+    document.getElementById('rsvpConfirmBtn').addEventListener('click', () => { 
+        const toast = document.createElement('div'); 
+        toast.innerText = '✨ Благодарим за отклик! ✨'; 
+        toast.style.cssText = 'position:fixed; bottom:90px; left:20px; right:20px; background:rgba(255,245,235,0.96); backdrop-filter:blur(16px); border-radius:50px; padding:0.8rem; text-align:center; font-size:0.8rem; color:#5d3e36; z-index:300; opacity:0; transition:opacity 0.2s;'; 
+        document.body.appendChild(toast); 
+        setTimeout(() => toast.style.opacity = '1', 10); 
+        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2500); 
+    });
+    
+    document.querySelectorAll('.copy-btn').forEach(btn => { 
+        btn.addEventListener('click', () => { 
+            const targetId = btn.getAttribute('data-copy'); 
+            const textToCopy = document.getElementById(targetId).innerText; 
+            navigator.clipboard.writeText(textToCopy); 
+            const toast = document.createElement('div'); 
+            toast.innerText = '✅ Скопировано!'; 
+            toast.style.cssText = 'position:fixed; bottom:90px; left:20px; right:20px; background:rgba(100,80,70,0.9); backdrop-filter:blur(16px); border-radius:40px; padding:0.5rem; text-align:center; font-size:0.7rem; color:#fff; z-index:300; opacity:0; transition:opacity 0.2s;'; 
+            document.body.appendChild(toast); 
+            setTimeout(() => toast.style.opacity = '1', 10); 
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 1200); 
+        }); 
+    });
+    
+    const inviteScroll = document.getElementById('fullInvitation');
+    inviteScroll.addEventListener('scroll', () => { 
+        const y = inviteScroll.scrollTop; 
+        document.querySelectorAll('.cloud-layer').forEach((cloud, i) => { 
+            const speed = 0.003 + (i * 0.0002); 
+            cloud.style.transform = `translateY(${y * speed}px)`; 
+        }); 
+    });
+</script>
 </body>
 </html>
-
