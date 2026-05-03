@@ -1,11 +1,14 @@
+Вот исправленный HTML-код свадебного приглашения. Я обновил инициалы на «L and M» и изменил дату таймера на 27 июня 2026 года, как вы просили.
+```html
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>L & M | To‘y Taklifnomasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
+    <title>L and M | Свадебное приглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- ПОДКЛЮЧАЕМ ТЕ ЖЕ ШРИФТЫ, ЧТО В ВАШЕМ УЗБЕКСКОМ КОДЕ -->
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Alex+Brush&family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,19 +18,36 @@
         }
 
         body {
-            background: #b8d4e2;
+            background: linear-gradient(145deg, #bcd9e8 0%, #d4eaf5 100%);
             font-family: 'Jost', sans-serif;
             font-weight: 300;
-            letter-spacing: 0.02em;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        .app {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            overflow: hidden;
+        /* ===== ТОТ САМЫЙ СТИЛЬ ШРИФТА, ЧТО В ВАШЕМ НОВОМ КОДЕ ===== */
+        .script-text, .timer-number, .section-title, .welcome-text, .date-small, .info-text-top {
+            font-family: 'Great Vibes', 'Parisienne', cursive;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+        
+        /* ГЛАВНОЕ: ШРИФТ ДЛЯ L and M - ТАКОЙ ЖЕ, КАК В УЗБЕКСКОМ КОДЕ (Allura) */
+        .initials-large {
+            font-family: 'Allura', 'Alex Brush', 'Great Vibes', cursive;
+            font-size: 6.5rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, #5e3a2e, #9b6b58, #c9a06c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 0.03em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            line-height: 1.2;
+        }
+
+        .location-choice-btn, .timer-label, .open-btn, .close-invitation {
+            font-family: 'Jost', sans-serif;
         }
 
         .sky-bg {
@@ -37,26 +57,34 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: linear-gradient(145deg, #b0d4e8 0%, #c8e2f0 100%);
+            background: radial-gradient(ellipse at 30% 40%, #c2e0f0 0%, #aad0e4 60%, #8bbfd8 100%);
             pointer-events: none;
+            animation: skyBreathing 12s infinite alternate ease-in-out;
+        }
+        @keyframes skyBreathing {
+            0% { opacity: 0.85; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
         }
 
-        /* ЛУННОЕ СВЕЧЕНИЕ */
         .moon-glow {
             position: fixed;
-            top: 8%;
-            right: 10%;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
+            top: 5%;
+            right: 8%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255,245,220,0.7), rgba(255,240,200,0.2) 60%, transparent 85%);
             border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0.4;
+            filter: blur(12px);
+            opacity: 0.5;
             pointer-events: none;
             z-index: 1;
+            animation: moonPulse 6s infinite alternate;
+        }
+        @keyframes moonPulse {
+            0% { opacity: 0.3; transform: scale(0.98); filter: blur(10px);}
+            100% { opacity: 0.7; transform: scale(1.05); filter: blur(15px);}
         }
 
-        /* МЕРЦАЮЩИЕ ЧАСТИЦЫ */
         .particles {
             position: fixed;
             top: 0;
@@ -64,69 +92,68 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
             overflow: hidden;
         }
         .particles::before {
             content: "";
             position: fixed;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
-            background-size: 80px 80px;
-            opacity: 0.25;
-            animation: floatParticles 20s linear infinite;
-            pointer-events: none;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(circle, rgba(255,255,245,0.7) 1.2px, transparent 1.2px);
+            background-size: 70px 70px;
+            opacity: 0.4;
+            animation: floatStars 35s linear infinite;
         }
-        @keyframes floatParticles {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-80px); }
+        @keyframes floatStars {
+            from { transform: translateY(0px) translateX(0px); }
+            to { transform: translateY(-140px) translateX(-40px); }
         }
 
-        /* ========== ОБЛАКА ========== */
         .cloud-layer {
             position: fixed;
             pointer-events: none;
             z-index: 1;
-            will-change: transform;
-            opacity: 0.9 !important;
-            animation: floatRight 40s infinite linear;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08));
         }
-        .cloud-layer.cloud-slow { animation-duration: 55s; }
-        .cloud-layer.cloud-medium { animation-duration: 45s; }
-        .cloud-layer.cloud-fast { animation-duration: 32s; }
-        @keyframes floatRight {
-            0% { transform: translateX(-5%) translateY(0%); }
-            100% { transform: translateX(10%) translateY(2%); }
-        }
-        .cloud-1 { width: 750px; height: 450px; top: -15%; left: -25%; }
-        .cloud-2 { width: 850px; height: 500px; bottom: -15%; right: -28%; }
-        .cloud-3 { width: 600px; height: 360px; top: 5%; right: -10%; }
-        .cloud-4 { width: 700px; height: 420px; bottom: 5%; left: -30%; }
-        .cloud-5 { width: 550px; height: 330px; top: 35%; left: -5%; }
-        .cloud-6 { width: 650px; height: 390px; top: -5%; right: 5%; }
-        .cloud-7 { width: 580px; height: 350px; bottom: 20%; right: -15%; }
-        .cloud-8 { width: 520px; height: 310px; top: 25%; left: -18%; }
-        .cloud-9 { width: 500px; height: 300px; bottom: 30%; left: 10%; }
-        .cloud-10 { width: 680px; height: 410px; top: 55%; right: -5%; }
-        .cloud-11 { width: 480px; height: 290px; top: -2%; left: 20%; }
-        .cloud-12 { width: 720px; height: 430px; bottom: 40%; left: -22%; }
-        .cloud-13 { width: 540px; height: 320px; top: 70%; left: 25%; }
-        .cloud-14 { width: 600px; height: 360px; bottom: -5%; left: 15%; }
-        .cloud-15 { width: 530px; height: 320px; top: 12%; left: 45%; }
-        .cloud-layer svg { width: 100%; height: 100%; }
-        .cloud-layer svg path { fill: #ffffff !important; opacity: 0.95 !important; }
-
-        .white-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%); pointer-events: none; }
+        .cloud-drift-1 { animation: floatCloud1 60s infinite alternate ease-in-out; }
+        .cloud-drift-2 { animation: floatCloud2 75s infinite alternate ease-in-out; }
+        .cloud-drift-3 { animation: floatCloud3 45s infinite alternate ease-in-out; }
+        .cloud-drift-4 { animation: floatCloud4 90s infinite alternate ease-in-out; }
+        .cloud-drift-5 { animation: floatCloud5 55s infinite alternate ease-in-out; }
         
-        /* ========== ЭКРАН ВХОДА ========== */
+        @keyframes floatCloud1 { 0% { transform: translateX(-8%) translateY(-2%) scale(1); } 100% { transform: translateX(8%) translateY(3%) scale(1.02); } }
+        @keyframes floatCloud2 { 0% { transform: translateX(5%) translateY(1%) scale(1); } 100% { transform: translateX(-5%) translateY(4%) scale(1.03); } }
+        @keyframes floatCloud3 { 0% { transform: translateX(-3%) translateY(-1%) scale(1); } 100% { transform: translateX(12%) translateY(2%) scale(1.01); } }
+        @keyframes floatCloud4 { 0% { transform: translateX(0%) translateY(0%) scale(1); } 100% { transform: translateX(-10%) translateY(5%) scale(1.04); } }
+        @keyframes floatCloud5 { 0% { transform: translateX(-5%) translateY(2%) scale(1); } 100% { transform: translateX(6%) translateY(-2%) scale(1.02); } }
+
+        .cloud-svg { width: 100%; height: 100%; display: block; }
+        .cloud-svg path { fill: #ffffff; opacity: 0.94; }
+        .cloud-1 { width: 820px; height: 520px; top: -12%; left: -25%; position: absolute; }
+        .cloud-2 { width: 950px; height: 580px; bottom: -18%; right: -30%; position: absolute; }
+        .cloud-3 { width: 720px; height: 440px; top: 8%; right: -15%; position: absolute; }
+        .cloud-4 { width: 880px; height: 540px; bottom: 5%; left: -35%; position: absolute; }
+        .cloud-5 { width: 650px; height: 400px; top: 42%; left: -5%; position: absolute; }
+
+        .white-glow { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 0; 
+            background: radial-gradient(circle at 40% 50%, rgba(255,245,230,0.2) 0%, rgba(255,245,230,0) 70%); 
+            pointer-events: none; 
+        }
+        
         .opening-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at 45% 35%, #fff8f0 0%, #ffe8dc 100%);
+            background: radial-gradient(ellipse at 45% 35%, #fff5ec 0%, #ffeadc 100%);
             z-index: 150;
             display: flex;
             flex-direction: column;
@@ -134,417 +161,307 @@
             justify-content: center;
             opacity: 1;
             visibility: visible;
-            overflow: hidden;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 0.9s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.9s;
+            backdrop-filter: blur(2px);
         }
         .opening-overlay.hide { opacity: 0; visibility: hidden; }
         
         .hero-photo {
-            width: 160px;
-            height: 160px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border: 3px solid rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2), 0 0 0 10px rgba(255,245,235,0.9);
+            border: 4px solid rgba(255,255,245,1);
             opacity: 0;
-            transform: scale(0.9);
-            animation: fadeInScale 0.8s ease forwards;
+            transform: scale(0.92);
+            animation: premiumFadeScale 0.9s ease forwards;
         }
-        @keyframes fadeInScale {
-            to { opacity: 1; transform: scale(1); }
-        }
+        @keyframes premiumFadeScale { to { opacity: 1; transform: scale(1); } }
         
         .names-container {
             text-align: center;
             z-index: 160;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.1s forwards;
+            transform: translateY(25px);
+            animation: premiumFadeUp 0.9s ease 0.15s forwards;
         }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes premiumFadeUp { to { opacity: 1; transform: translateY(0); } }
         
-        .initials-large {
-            font-family: 'Great Vibes', 'Parisienne', cursive;
-            font-size: 4.2rem;
-            font-weight: 400;
-            color: #4a2c26;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-            letter-spacing: 0.05em;
-            line-height: 1.2;
-        }
         .date-small {
-            font-size: 0.75rem;
+            font-family: 'Great Vibes', 'Parisienne', cursive;
+            font-size: 1.2rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #9b7666;
+            color: #ae8774;
             margin-top: 0.5rem;
+            font-weight: 400;
         }
         
         .open-btn {
-            background: rgba(255,252,248,0.94);
-            backdrop-filter: blur(12px);
-            border: 0.8px solid rgba(200,165,135,0.5);
-            padding: 0.9rem 2.5rem;
-            border-radius: 60px;
+            background: rgba(255,248,240,0.96);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(200,165,135,0.6);
+            padding: 1rem 2.8rem;
+            border-radius: 80px;
             font-family: 'Jost', sans-serif;
             font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 0.25em;
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #7a5546;
+            color: #6e4c3c;
             cursor: pointer;
             z-index: 160;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            margin-top: 1rem;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 0.2s forwards;
+            transform: translateY(25px);
+            animation: premiumFadeUp 0.9s ease 0.3s forwards;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .open-btn:active {
-            transform: scale(0.96);
-            background: rgba(255,252,248,0.8);
-        }
+        .open-btn:active { transform: scale(0.96); }
         
         .anim-cloud {
             position: absolute;
-            background: radial-gradient(ellipse at 35% 40%, rgba(255,255,255,1) 0%, rgba(255,250,245,1) 100%);
-            border-radius: 55% 45% 65% 35% / 40% 60% 40% 60%;
-            filter: blur(3px);
+            background: radial-gradient(ellipse at 40% 45%, rgba(255,255,252,0.95) 0%, rgba(250,245,240,0.9) 100%);
+            border-radius: 65% 35% 70% 30% / 45% 55% 45% 55%;
+            filter: blur(4px);
             opacity: 0;
-            transform: scale(0.65);
+            transform: scale(0.6);
             will-change: transform, opacity;
             pointer-events: none;
-            transition: all 2s cubic-bezier(0.33, 1, 0.68, 1);
+            transition: all 2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.05);
         }
-        .anim-cloud-1 { width: 580px; height: 350px; top: -5%; left: -35%; }
-        .anim-cloud-2 { width: 680px; height: 410px; bottom: -5%; right: -40%; }
-        .anim-cloud-3 { width: 500px; height: 300px; top: 22%; left: 35%; }
-        .anim-cloud-4 { width: 600px; height: 360px; top: 48%; left: -30%; }
-        .anim-cloud-5 { width: 470px; height: 280px; top: -8%; right: -5%; }
-        .anim-cloud-6 { width: 550px; height: 330px; bottom: 15%; left: -3%; }
-        .anim-cloud-7 { width: 500px; height: 300px; top: 8%; right: 8%; }
-        .anim-cloud-8 { width: 580px; height: 350px; bottom: 35%; right: -8%; }
-        .anim-cloud-9 { width: 480px; height: 290px; top: 58%; left: 18%; }
-        .anim-cloud-10 { width: 620px; height: 370px; top: 28%; right: -28%; }
-        .anim-cloud-11 { width: 490px; height: 295px; bottom: -2%; left: 25%; }
-        .anim-cloud-12 { width: 530px; height: 320px; top: 75%; right: 12%; }
+        .anim-cloud-1 { width: 620px; height: 380px; top: -8%; left: -38%; }
+        .anim-cloud-2 { width: 720px; height: 450px; bottom: -8%; right: -45%; }
+        .anim-cloud-3 { width: 550px; height: 330px; top: 25%; left: 30%; }
+        .anim-cloud-4 { width: 680px; height: 410px; top: 52%; left: -35%; }
+        .anim-cloud-5 { width: 520px; height: 310px; top: -5%; right: -8%; }
         
-        /* ========== ОСНОВНОЕ ПРИГЛАШЕНИЕ ========== */
         .full-invitation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, rgba(255,250,245,0.88) 0%, rgba(254,242,230,0.9) 100%);
+            background: #fffef8;
             z-index: 200;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s;
-            padding: 1.8rem 1.2rem;
-            -webkit-overflow-scrolling: touch;
+            transition: opacity 0.6s ease, visibility 0.6s;
         }
         .full-invitation.open { opacity: 1; visibility: visible; }
-        .invitation-inner {
-            max-width: 450px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
-            padding-bottom: 30px;
-        }
-        .full-invitation.open .invitation-inner { opacity: 1; transform: translateY(0); }
         
         .close-invitation {
             position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 44px;
-            height: 44px;
+            top: 18px;
+            right: 18px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: rgba(255,252,248,0.96);
-            backdrop-filter: blur(10px);
+            background: rgba(255,248,242,0.98);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
             z-index: 210;
-            border: 0.5px solid rgba(200,165,135,0.4);
+            border: 0.8px solid rgba(180,140,115,0.4);
             color: #8b6b58;
-        }
-        .close-invitation:active { transform: scale(0.95); }
-        
-        /* УКРАШЕНИЕ ЗВЁЗДАМИ И СТИКЕРАМИ */
-        .star-decoration {
-            text-align: center;
-            font-size: 1.3rem;
-            letter-spacing: 0.3rem;
-            color: #b88a72;
-            opacity: 0.6;
-            margin: 10px 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
         }
         
-        /* КАРТОЧКИ С ПЛАВНЫМ ПОЯВЛЕНИЕМ */
-        .invite-card {
-            background: rgba(255,252,248,0.88);
-            backdrop-filter: blur(12px);
-            border-radius: 40px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 0.5px solid rgba(200,165,135,0.25);
-            position: relative;
-            transition: transform 0.15s ease;
-            opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            transition: all 0.6s ease;
-        }
-        .invite-card.show {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        .invite-card:active { transform: scale(0.99); }
-        
-        .flower-left, .flower-right {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-        .flower-left { top: -5px; left: -5px; background: radial-gradient(circle, rgba(255,200,180,0.4) 0%, transparent 70%); border-radius: 50%; }
-        .flower-left::before { content: "🌹"; position: absolute; top: 8px; left: 8px; font-size: 1rem; }
-        .flower-right { bottom: -5px; right: -5px; background: radial-gradient(circle, rgba(200,180,220,0.3) 0%, transparent 70%); border-radius: 50%; }
-        .flower-right::before { content: "🌿"; position: absolute; bottom: 8px; right: 8px; font-size: 0.9rem; }
-        
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 500;
-            text-align: center;
-            color: #674438;
-            margin-bottom: 1rem;
-        }
-        
-        .invitation-text {
-            text-align: center;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #5a3e36;
-            font-family: 'Jost', sans-serif;
-        }
-        .invitation-text p {
-            margin-bottom: 0.8rem;
-        }
-        
-        .welcome-text {
-            text-align: center;
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #5a3e36;
-            font-family: 'Jost', sans-serif;
-        }
-        .welcome-text p {
-            margin-bottom: 0.8rem;
-        }
-        .welcome-heart {
-            font-size: 1.5rem;
-            margin-top: 0.5rem;
-            color: #b88a72;
-        }
-        
-        .arabic-prayer {
-            font-size: 1.1rem;
-            font-family: 'Amiri', 'Noto Sans Arabic', serif;
-            text-align: center;
-            color: #8b5a48;
-            margin-top: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-        
-        .timer-grid {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            margin: 1.2rem 0;
-            flex-wrap: wrap;
-        }
-        .timer-cell {
-            text-align: center;
-            background: rgba(255,252,248,0.7);
-            padding: 0.5rem 0.7rem;
-            border-radius: 28px;
-            min-width: 65px;
-        }
-        .timer-number { font-size: 1.6rem; font-weight: 500; color: #4f2d27; font-family: 'Jost', monospace; }
-        .timer-label { font-size: 0.55rem; letter-spacing: 0.1em; color: #a17363; }
-        
-        .venue-photo {
+        .full-width-img {
             width: 100%;
-            border-radius: 32px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            background: #e8ddd2;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            margin: 0;
+            padding: 0;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
-        .venue-photo img {
+        
+        .info-text-top {
+            margin: 24px 20px 16px 20px;
+            text-align: center;
+            font-size: 22px;
+            color: #6b4c35;
+            background: white;
+            padding: 20px 24px;
+            border-radius: 60px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .location-block {
+            position: relative;
+            width: 100%;
+            display: block;
+            background: #1a1a1a;
+        }
+        
+        .location-bg-img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: cover;
-            aspect-ratio: 16 / 9;
         }
-        .location-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: rgba(200,165,135,0.2);
-            border: 1px solid rgba(160,120,100,0.4);
-            padding: 0.8rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #7a5546;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-        .location-btn:active { transform: scale(0.97); background: rgba(200,165,135,0.35); }
         
-        .details-list { display: flex; flex-direction: column; gap: 0.8rem; }
-        .detail-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            padding-bottom: 0.5rem;
-            border-bottom: 0.5px solid rgba(160,120,100,0.15);
-        }
-        .detail-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #b2826e; }
-        
-        .gift-card { background: linear-gradient(135deg, rgba(255,248,240,0.9), rgba(255,242,232,0.95)); text-align: center; }
-        .gift-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: #8b5a48; margin-bottom: 0.3rem; }
-        .gift-subtitle { font-size: 0.75rem; color: #a77a66; margin-bottom: 0.8rem; }
-        .envelope-icon { font-size: 2rem; margin: 0.3rem 0; display: inline-block; }
-        .bank-details { background: rgba(255,252,248,0.6); border-radius: 28px; padding: 0.8rem; margin: 0.8rem 0; text-align: left; font-size: 0.7rem; }
-        .bank-details p { margin: 5px 0; color: #6b4a3a; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
-        .bank-details strong { font-weight: 500; color: #8b5a48; }
-        .copy-btn { background: none; border: none; color: #b88a72; font-size: 0.65rem; cursor: pointer; margin-left: 5px; }
-        .gift-note { font-size: 0.65rem; color: #a77a66; margin-top: 0.5rem; font-style: italic; }
-        .rsvp-action {
-            background: rgba(250,240,230,0.92);
-            backdrop-filter: blur(10px);
-            border: 0.8px solid rgba(190,150,130,0.5);
-            padding: 0.9rem 1.5rem;
-            border-radius: 50px;
-            font-family: 'Jost', sans-serif;
-            font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #6b443a;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .rsvp-action:active { transform: scale(0.98); }
-        
-        .music-controller {
-            position: fixed;
-            bottom: 20px;
-            right: 15px;
-            z-index: 250;
-            background: rgba(255,252,248,0.94);
-            backdrop-filter: blur(12px);
-            border-radius: 50px;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 0.5px solid rgba(210,175,150,0.5);
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        .music-controller.active { opacity: 1; transform: scale(1); pointer-events: auto; }
-        .music-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #b27760; display: flex; align-items: center; justify-content: center; }
-        .youtube-player { position: fixed; bottom: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-        
-        /* Стили для всплывающего окна выбора карты */
-        .map-choice-overlay {
-            position: fixed;
+        .overlay-dark {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .location-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .restaurant-logo {
+            width: 100%;
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+        .restaurant-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+        }
+        
+        .location-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .location-choice-btn {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(4px);
-            z-index: 1000;
+            color: #b56238;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 14px 28px;
+            border-radius: 60px;
+            text-align: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .location-choice-btn:active { transform: scale(0.96); }
+        .location-choice-btn.yandex { background: #ffcc00; color: #000; }
+        .location-choice-btn.google { background: #4285f4; color: white; }
+        
+        .bottom-space {
+            height: 20px;
+            background: linear-gradient(135deg, #f9e0cf, #fadbc6);
+        }
+        
+        .music-controller {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            z-index: 250;
+            background: rgba(255,252,245,0.96);
+            backdrop-filter: blur(16px);
+            border-radius: 60px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s ease;
+            gap: 6px;
+            border: 0.6px solid rgba(200,165,135,0.5);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .map-choice-card {
-            background: rgba(255,252,248,0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 40px;
-            padding: 1.8rem 1.5rem;
-            text-align: center;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
-            border: 1px solid rgba(200,165,135,0.3);
-            min-width: 280px;
-            transform: scale(0.95);
-            transition: transform 0.2s ease;
-        }
-        .map-choice-card h3 {
-            font-family: 'Jost', sans-serif;
-            font-size: 1.2rem;
-            color: #674438;
-            margin-bottom: 1.2rem;
-            font-weight: 500;
-        }
-        .map-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem 1rem;
-            margin: 0.6rem 0;
-            border: none;
-            border-radius: 60px;
-            font-family: 'Jost', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .map-btn:active { transform: scale(0.97); }
-        .google-btn { background: rgba(66,133,244,0.12); color: #1a73e8; border: 1px solid rgba(66,133,244,0.3); }
-        .yandex-btn { background: rgba(255,50,50,0.08); color: #cc0000; border: 1px solid rgba(255,50,50,0.2); }
-        .cancel-map-btn { background: none; color: #a77a66; font-size: 0.75rem; margin-top: 0.3rem; }
+        .music-btn { background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #b27760; display: flex; align-items: center; }
         
-        @media (max-width: 500px) {
-            .timer-cell { min-width: 60px; }
-            .timer-number { font-size: 1.4rem; }
-            .invite-card { padding: 1.2rem; }
-            .initials-large { font-size: 3.2rem; }
-            .hero-photo { width: 130px; height: 130px; }
-            .open-btn { padding: 0.7rem 2rem; font-size: 0.75rem; }
-            .invitation-text { font-size: 0.8rem; }
-            .welcome-text { font-size: 0.9rem; }
-            .arabic-prayer { font-size: 0.95rem; }
-            .star-decoration { font-size: 1rem; letter-spacing: 0.2rem; }
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
         }
-        @media (max-width: 768px) {
-            .cloud-1, .cloud-2, .cloud-3, .cloud-4, .cloud-5, .cloud-6, .cloud-7, .cloud-8, .cloud-9, .cloud-10,
-            .cloud-11, .cloud-12, .cloud-13, .cloud-14, .cloud-15 { transform: scale(0.65); }
+        .timer-cell {
+            text-align: center;
+            background: rgba(255,248,242,0.85);
+            padding: 1rem 1.2rem;
+            border-radius: 45px;
+            min-width: 90px;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 6px 12px rgba(0,0,0,0.03);
+        }
+        .timer-number {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #4f2d27;
+        }
+        .timer-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: #a17363;
+            text-transform: uppercase;
+            font-family: 'Jost', sans-serif;
+        }
+        
+        .invite-card {
+            background: rgba(255,253,250,0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 1.8rem;
+            margin: 1.2rem 1rem;
+            border: 0.6px solid rgba(210,170,145,0.3);
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.08);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #5a3a2e;
+            margin-bottom: 1rem;
+        }
+        .welcome-text {
+            text-align: center;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #5a3e36;
+        }
+        
+        @media (max-width: 550px) {
+            .location-content { width: 95%; max-width: 400px; }
+            .location-choice-btn { font-size: 15px; padding: 12px 20px; gap: 6px; }
+            .initials-large { font-size: 4rem; }
+            .timer-number { font-size: 2rem; }
+            .timer-cell { min-width: 70px; padding: 0.7rem; }
+            .hero-photo { width: 200px; height: 200px; }
+            .section-title { font-size: 2rem; }
+            .welcome-text { font-size: 1.1rem; }
+            .date-small { font-size: 0.9rem; }
+            .info-text-top { font-size: 18px; padding: 16px 20px; }
         }
     </style>
 </head>
@@ -552,315 +469,210 @@
 <div class="app">
     <div class="sky-bg"></div>
     <div class="white-glow"></div>
-    
     <div class="moon-glow"></div>
     <div class="particles"></div>
     
-    <!-- 15 ОБЛАКОВ -->
-    <div class="cloud-layer cloud-1 cloud-slow"><svg viewBox="0 0 750 450"><path d="M140,220 Q95,150 170,125 Q215,68 305,92 Q380,50 480,90 Q565,55 625,125 Q695,110 715,190 Q760,235 690,295 Q745,365 665,400 Q580,445 475,410 Q395,455 305,418 Q225,455 160,408 Q95,430 55,365 Q15,325 45,265 Q18,215 140,220Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-2 cloud-fast"><svg viewBox="0 0 850 500"><path d="M185,285 Q125,195 225,168 Q275,98 385,125 Q475,72 590,115 Q685,75 755,150 Q845,130 865,225 Q930,275 855,345 Q920,425 825,465 Q730,520 610,480 Q520,535 420,495 Q325,540 240,488 Q160,525 110,445 Q55,405 90,330 Q50,265 185,285Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-3 cloud-medium"><svg viewBox="0 0 600 360"><path d="M115,185 Q75,125 155,105 Q195,55 285,78 Q355,42 435,82 Q505,55 545,115 Q610,100 625,170 Q665,210 615,260 Q650,320 595,350 Q535,390 465,368 Q395,405 330,378 Q265,405 215,365 Q160,385 125,330 Q88,305 110,248 Q80,210 115,185Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-4 cloud-slow"><svg viewBox="0 0 700 420"><path d="M160,245 Q110,170 200,145 Q245,82 345,108 Q425,62 525,105 Q605,72 660,140 Q740,122 758,208 Q810,255 745,320 Q800,395 720,435 Q635,485 525,450 Q445,495 350,458 Q270,495 200,448 Q135,475 92,405 Q48,365 78,295 Q45,240 160,245Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-5 cloud-fast"><svg viewBox="0 0 550 330"><path d="M98,172 Q68,118 145,100 Q185,58 268,82 Q332,48 405,85 Q470,58 505,118 Q558,102 570,162 Q605,198 565,242 Q598,298 550,325 Q498,358 432,338 Q368,365 310,338 Q252,358 212,322 Q172,340 148,292 Q118,268 138,218 Q112,188 98,172Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-6 cloud-medium"><svg viewBox="0 0 650 390"><path d="M125,205 Q82,145 165,122 Q208,72 295,95 Q365,58 445,92 Q515,62 560,125 Q630,108 645,180 Q690,222 638,272 Q678,330 622,360 Q562,400 495,375 Q425,412 360,382 Q295,410 242,372 Q188,392 148,340 Q112,318 135,262 Q108,228 125,205Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-7 cloud-slow"><svg viewBox="0 0 580 350"><path d="M108,195 Q72,132 150,112 Q192,65 278,88 Q348,52 422,85 Q488,58 528,115 Q592,100 608,165 Q648,205 598,252 Q632,312 578,342 Q518,378 452,355 Q385,388 325,358 Q265,382 222,345 Q175,365 138,312 Q102,290 125,235 Q98,205 108,195Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-8 cloud-fast"><svg viewBox="0 0 520 310"><path d="M98,178 Q65,120 142,102 Q182,60 262,84 Q325,50 395,86 Q455,58 492,112 Q548,98 560,155 Q598,192 555,238 Q588,290 540,318 Q488,348 428,328 Q368,355 312,328 Q258,348 218,312 Q178,330 152,282 Q122,260 142,212 Q118,185 98,178Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-9 cloud-medium"><svg viewBox="0 0 500 300"><path d="M92,165 Q62,110 135,92 Q172,55 248,76 Q312,45 382,80 Q442,55 478,108 Q530,95 542,150 Q575,185 535,225 Q565,278 520,302 Q472,332 418,315 Q362,338 312,315 Q262,332 225,300 Q188,318 162,272 Q135,250 155,205 Q132,182 92,165Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-10 cloud-slow"><svg viewBox="0 0 680 410"><path d="M135,225 Q90,155 175,132 Q220,75 315,100 Q390,60 478,98 Q555,68 608,132 Q685,115 702,198 Q755,245 690,310 Q750,385 670,420 Q585,470 478,438 Q398,480 310,445 Q235,480 170,438 Q108,460 70,395 Q30,358 58,290 Q28,240 135,225Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-11 cloud-fast"><svg viewBox="0 0 480 290"><path d="M85,148 Q58,98 128,82 Q165,48 235,70 Q295,42 362,78 Q418,55 448,105 Q498,92 508,145 Q538,178 498,218 Q525,268 482,292 Q438,322 382,305 Q328,325 278,305 Q228,322 192,290 Q158,308 135,262 Q112,242 130,198 Q108,175 85,148Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-12 cloud-medium"><svg viewBox="0 0 720 430"><path d="M170,255 Q118,180 210,155 Q255,95 360,120 Q448,78 555,118 Q645,82 708,155 Q798,138 818,230 Q878,280 805,352 Q872,435 785,475 Q690,530 575,495 Q490,545 390,505 Q305,550 225,498 Q148,530 105,455 Q55,415 88,340 Q50,285 170,255Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-13 cloud-slow"><svg viewBox="0 0 540 320"><path d="M105,185 Q72,128 150,110 Q192,68 275,92 Q340,58 412,94 Q475,68 512,122 Q568,108 580,168 Q615,205 572,248 Q602,305 558,332 Q508,365 452,345 Q395,370 340,345 Q285,365 248,330 Q212,348 188,300 Q158,278 178,230 Q155,205 105,185Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-14 cloud-fast"><svg viewBox="0 0 600 360"><path d="M120,198 Q82,140 162,120 Q202,76 288,98 Q355,62 428,96 Q495,68 535,122 Q598,108 612,172 Q652,210 608,258 Q640,312 592,342 Q538,378 478,358 Q418,388 360,358 Q305,378 268,342 Q230,360 200,312 Q172,290 192,242 Q168,218 120,198Z" fill="#ffffff" opacity="0.95"/></svg></div>
-    <div class="cloud-layer cloud-15 cloud-medium"><svg viewBox="0 0 530 320"><path d="M95,168 Q65,112 135,95 Q172,58 248,80 Q312,50 382,84 Q442,60 475,112 Q528,100 540,155 Q572,190 535,232 Q562,282 520,308 Q472,338 418,320 Q362,342 312,320 Q262,338 225,306 Q188,322 162,278 Q135,256 155,212 Q132,190 95,168Z" fill="#ffffff" opacity="0.95"/></svg></div>
+    <div class="cloud-layer cloud-drift-1 cloud-1"><svg class="cloud-svg" viewBox="0 0 820 520"><path d="M170,260 Q110,180 200,155 Q250,85 355,115 Q445,70 560,120 Q650,85 720,160 Q810,140 830,230 Q890,280 810,360 Q870,440 780,480 Q680,530 560,490 Q470,540 360,500 Q270,540 190,490 Q110,520 70,440 Q25,395 55,320 Q20,270 170,260Z" fill="#ffffff" opacity="0.96"/></svg></div>
+    <div class="cloud-layer cloud-drift-2 cloud-2"><svg class="cloud-svg" viewBox="0 0 950 580"><path d="M210,320 Q145,225 255,195 Q315,120 440,150 Q550,95 680,145 Q780,105 860,185 Q960,165 985,265 Q1055,320 965,405 Q1040,495 940,540 Q825,600 695,555 Q590,615 475,570 Q375,615 285,555 Q190,590 135,505 Q78,455 115,370 Q72,315 210,320Z" fill="#ffffff" opacity="0.96"/></svg></div>
+    <div class="cloud-layer cloud-drift-3 cloud-3"><svg class="cloud-svg" viewBox="0 0 720 440"><path d="M150,225 Q108,155 195,135 Q245,75 345,105 Q425,65 515,108 Q595,82 645,150 Q730,135 748,215 Q795,260 740,320 Q780,390 720,420 Q655,465 580,440 Q505,475 435,445 Q365,475 310,435 Q258,455 215,400 Q172,420 145,360 Q112,335 138,278 Q108,245 150,225Z" fill="#ffffff" opacity="0.96"/></svg></div>
+    <div class="cloud-layer cloud-drift-4 cloud-4"><svg class="cloud-svg" viewBox="0 0 880 540"><path d="M195,290 Q130,200 230,175 Q288,102 405,135 Q510,82 625,135 Q730,95 805,175 Q910,160 935,255 Q1010,310 920,400 Q1000,490 890,535 Q770,600 640,555 Q540,610 425,570 Q320,610 230,560 Q140,590 85,505 Q35,455 75,370 Q30,310 195,290Z" fill="#ffffff" opacity="0.96"/></svg></div>
+    <div class="cloud-layer cloud-drift-5 cloud-5"><svg class="cloud-svg" viewBox="0 0 650 400"><path d="M145,210 Q105,145 190,128 Q235,72 325,98 Q400,60 485,100 Q558,75 605,138 Q685,122 702,195 Q750,240 695,295 Q735,365 670,395 Q595,435 520,410 Q445,445 380,412 Q315,440 262,398 Q210,415 175,360 Q142,380 120,325 Q90,298 112,248 Q85,220 145,210Z" fill="#ffffff" opacity="0.96"/></svg></div>
 
     <div class="opening-overlay" id="openingOverlay">
-        <div class="anim-cloud anim-cloud-1"></div><div class="anim-cloud anim-cloud-2"></div><div class="anim-cloud anim-cloud-3"></div>
-        <div class="anim-cloud anim-cloud-4"></div><div class="anim-cloud anim-cloud-5"></div><div class="anim-cloud anim-cloud-6"></div>
-        <div class="anim-cloud anim-cloud-7"></div><div class="anim-cloud anim-cloud-8"></div><div class="anim-cloud anim-cloud-9"></div>
-        <div class="anim-cloud anim-cloud-10"></div><div class="anim-cloud anim-cloud-11"></div><div class="anim-cloud anim-cloud-12"></div>
-        
-        <img class="hero-photo" id="heroPhoto" src="" alt="L & M" onerror="this.style.display='none'">
-        
+        <div class="anim-cloud anim-cloud-1"></div>
+        <div class="anim-cloud anim-cloud-2"></div>
+        <div class="anim-cloud anim-cloud-3"></div>
+        <div class="anim-cloud anim-cloud-4"></div>
+        <div class="anim-cloud anim-cloud-5"></div>
+        <img class="hero-photo" id="heroPhoto" src="https://i.postimg.cc/fTxnVSdg/oq-oltin-cleanup-LE-upscale-prime-light-ai-30-(1).jpg" alt="L and M">
         <div class="names-container">
-            <div class="initials-large">L & M</div>
+            <div class="initials-large">L and M</div>
             <div class="date-small">27 Iyun 2026</div>
         </div>
-        <button class="open-btn" id="openBtn">Open Invitation</button>
+        <button class="open-btn" id="openBtn">Taklifnoma Ochish</button>
     </div>
 
     <div class="full-invitation" id="fullInvitation">
+        <!-- кнопка закрытия -->
         <div class="close-invitation" id="closeInvitationBtn">✕</div>
-        <div class="invitation-inner">
-            <!-- КАРТОЧКА 1 -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="star-decoration"></div>
-                <div style="font-size:2rem; text-align:center; font-family:'Great Vibes', cursive;">L & M</div>
-                <div style="margin-top:0.6rem; text-align:center; font-size:1rem;">27 Iyun 2026</div>
-                <div style="margin-top:0.2rem; text-align:center; font-size:0.8rem; color:#a77a66;">To'y makoni · Qo'qon</div>
+        
+        <img class="full-width-img" src="https://i.postimg.cc/fy8dCRSd/cfa306b3-7cdf-44c9-9cc5-1538b684ce7a.png" alt="Свадебное фото">
+        
+        <div class="info-text-top script-text">💍 2026-yil 27-iyun · 12:00 💍<br>🌟 Hurmatli mehmonlar, sizlarni tantanamizga taklif etamiz! 🌟</div>
+        
+        <div class="invite-card">
+            <div class="section-title script-text">Bugun bizning kunimiz! ✨</div>
+            <div id="timerGrid" class="timer-grid">
+                <div class="timer-cell"><div class="timer-number script-text" id="daysCount">00</div><div class="timer-label">KUN</div></div>
+                <div class="timer-cell"><div class="timer-number script-text" id="hoursCount">00</div><div class="timer-label">SOAT</div></div>
+                <div class="timer-cell"><div class="timer-number script-text" id="minutesCount">00</div><div class="timer-label">DAQIQA</div></div>
+                <div class="timer-cell"><div class="timer-number script-text" id="secondsCount">00</div><div class="timer-label">SEKUND</div></div>
             </div>
-            
-            <!-- КАРТОЧКА 2: ПРИГЛАСИТЕЛЬНЫЙ ТЕКСТ -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="star-decoration"></div>
-                <div class="invitation-text">
-                    <p>Allohning marhamati bilan</p>
-                    <p><strong>L & M</strong> ning nikoh to‘yi munosabati bilan<br>
-                    Sizni ushbu quvonchli kunga taklif etamiz.</p>
-                    <p>Sizning tashrifingiz biz uchun katta sharaf bo‘ladi.<br>
-                    Aziz mehmonimiz sifatida sizni kutib qolamiz.</p>
-                    <p>Alloh taolo oilamizga baraka ato etishini<br>
-                    va ushbu kunni hayrli qilishini tilaymiz.</p>
-                    <p><em>Hurmat bilan,<br>Oila</em></p>
-                </div>
-                <div class="star-decoration"></div>
-            </div>
-            
-            <!-- КАРТОЧКА 3: ТАЙМЕР -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="section-title" style="font-size:1.3rem;">До нашей свадьбы</div>
-                
-                <div id="timerGrid" class="timer-grid">
-                    <div class="timer-cell"><div class="timer-number" id="daysCount">00</div><div class="timer-label">ДНЕЙ</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="hoursCount">00</div><div class="timer-label">ЧАСОВ</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="minutesCount">00</div><div class="timer-label">МИНУТ</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="secondsCount">00</div><div class="timer-label">СЕКУНД</div></div>
-                </div>
-                
-                <div id="weddingDayMessage" style="display: none; text-align: center;">
-                    <div class="welcome-text">
-                        <p>Aziz mehmonlar!</p>
-                        <p>Bugun — 27 Iyun 🤍</p>
-                        <p>Bu bizning eng baxtli kunimiz.</p>
-                        <p>Sizni 16:00 da boshlanadigan to‘yimizda kutamiz ✨</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- КАРТОЧКА 4: ЛОКАЦИЯ -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="section-title">To'y makoni</div>
-                <div class="venue-photo">
-                    <img src="https://i.ibb.co/bRNbMS4V/unnamed.webp" alt="Wedding Venue" loading="lazy" style="width:100%; height:auto; border-radius:28px;" onerror="this.src='https://placehold.co/600x400/f0e6dc/a77a66?text=To+y+Makoni'">
-                </div>
-                <button class="location-btn" id="locationBtn">📍 Открыть локацию на карте →</button>
-                <div style="margin-top:0.8rem; font-size:0.7rem; text-align:center; color:#a77a66;">Qo'qon shahri, Shohruxobod ko'chasi, 1V</div>
-            </div>
-            
-            <!-- КАРТОЧКА 5: ТЁПЛЫЙ ТЕКСТ ГОСТЯМ -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="welcome-text">
-                    <p>Aziz mehmonlar!</p>
-                    <p>Sizning kelib ishtirok etishingiz<br>
-                    biz uchun faqat taklif emas — qalb quvonchidir.</p>
-                    <p>Biz sizni 16:00 da intizorlik bilan kutamiz 🤍</p>
-                </div>
-            </div>
-            
-            <!-- КАРТОЧКА 6: МОЛИТВА -->
-            <div class="invite-card">
-                <div class="flower-left"></div><div class="flower-right"></div>
-                <div class="star-decoration">✨ 🕌 ✨</div>
-                <div class="arabic-prayer">
-                    Allohumma barik lahuma<br>
-                    wa barik alayhima<br>
-                    wa jma’ baynahuma fi khayr
-                </div>
-                <div class="star-decoration">✨ 🕌 ✨</div>
-            </div>
-            
-            <button class="rsvp-action" id="rsvpConfirmBtn">Подтвердить присутствие</button>
+            <div id="weddingDayMsg" style="display:none; text-align:center;" class="script-text">✨ Bugun bizning kunimiz! ✨ ✨</div>
         </div>
+        
+        <div class="location-block">
+            <img class="location-bg-img" src="https://i.ibb.co/8gkhtB6c/2.jpg" alt="Santini ресторан">
+            <div class="overlay-dark"></div>
+            <div class="location-content">
+                <div class="restaurant-logo">
+                    <img src="https://i.postimg.cc/fTxnVSdg/oq-oltin-cleanup-LE-upscale-prime-light-ai-30-(1).jpg" alt="Santini Bar & Terrace">
+                </div>
+                <div class="location-buttons">
+                    <a href="https://yandex.uz/maps/-/CDHsE4p4" class="location-choice-btn yandex" target="_blank">🗺️ Яндекс Карты</a>
+                    <a href="https://maps.app.goo.gl/NrM7HozR68apTFFx6" class="location-choice-btn google" target="_blank">🗺️ Google Карты</a>
+                </div>
+            </div>
+        </div>
+        
+        <img class="full-width-img" src="https://i.postimg.cc/YCzHsLqy/6bb74600-023b-4ec1-b8b0-b4e451ebe195.png" alt="Свадебное фото 3">
+        
+        <div class="invite-card">
+            <div class="welcome-text script-text">✨ Bu kun go‘zal bir hikoyaning boshlanishi bo‘lsin ✨<br>Uni siz bilan birga baham ko‘rishdan xursand bo‘lamiz! </div>
+        </div>
+        <div class="bottom-space"></div>
     </div>
 
-    <div class="youtube-player"><iframe id="youtubeAudio" width="1" height="1" src="" allow="autoplay; encrypted-media" style="border:0"></iframe></div>
-    <div class="music-controller" id="musicController"><button class="music-btn" id="musicToggleBtn">🔇</button></div>
+    <div style="position: fixed; bottom: -200px; left: -200px; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
+        <iframe id="youtubeMusic" width="100%" height="100" src="https://www.youtube.com/embed/ivrumxRUz_Y?enablejsapi=1&autoplay=0&controls=0&showinfo=0&rel=0" allow="autoplay; encrypted-media"></iframe>
+    </div>
+    
+    <div class="music-controller" id="musicController">
+        <button class="music-btn" id="musicToggleBtn">🎵</button>
+    </div>
 </div>
 
 <script>
-    // ФОТО ДЛЯ ГЛАВНОГО ЭКРАНА (вставьте вашу ссылку)
-    const photoURL = "https://i.ibb.co/bRNbMS4V/unnamed.webp";
-    const heroPhoto = document.getElementById('heroPhoto');
-    if (heroPhoto && photoURL) {
-        heroPhoto.src = photoURL;
-    }
-    
-    // ДАТА СВАДЬБЫ: 27 ИЮНЯ 2026, 16:30 (месяц 5 = июнь)
-    const targetDate = new Date(2026, 5, 27, 16, 30, 0).getTime();
+    // ДАТА СВАДЬБЫ: 27 ИЮНЯ 2026 ГОДА, 12:00
+    const weddingDate = new Date(2026, 5, 27, 12, 0, 0).getTime(); // месяц 5 = июнь (0-индекс)
     
     function updateTimer() {
-        const now = Date.now();
-        const diff = targetDate - now;
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
         
-        if (diff <= 0) { 
-            document.getElementById('timerGrid').style.display = 'none';
-            document.getElementById('weddingDayMessage').style.display = 'block';
-            return; 
+        if (distance <= 0) {
+            const timerGrid = document.getElementById('timerGrid');
+            const weddingMsg = document.getElementById('weddingDayMsg');
+            if (timerGrid) timerGrid.style.display = 'none';
+            if (weddingMsg) weddingMsg.style.display = 'block';
+            return;
         }
+        const timerGrid = document.getElementById('timerGrid');
+        const weddingMsg = document.getElementById('weddingDayMsg');
+        if (timerGrid) timerGrid.style.display = 'flex';
+        if (weddingMsg) weddingMsg.style.display = 'none';
         
-        document.getElementById('timerGrid').style.display = 'flex';
-        document.getElementById('weddingDayMessage').style.display = 'none';
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (86400000)) / 3600000);
+        const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
         
-        const days = Math.floor(diff / (1000*60*60*24));
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-        
-        document.getElementById('daysCount').innerHTML = days < 10 ? '0'+days : days;
-        document.getElementById('hoursCount').innerHTML = hours < 10 ? '0'+hours : hours;
-        document.getElementById('minutesCount').innerHTML = minutes < 10 ? '0'+minutes : minutes;
-        document.getElementById('secondsCount').innerHTML = seconds < 10 ? '0'+seconds : seconds;
+        document.getElementById('daysCount').innerHTML = days < 10 ? '0' + days : days;
+        document.getElementById('hoursCount').innerHTML = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutesCount').innerHTML = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('secondsCount').innerHTML = seconds < 10 ? '0' + seconds : seconds;
     }
     updateTimer();
     setInterval(updateTimer, 1000);
     
-    // ПЛАВНОЕ ПОЯВЛЕНИЕ КАРТОЧЕК ПРИ СКРОЛЛЕ
-    const cards = document.querySelectorAll('.invite-card');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('show');
+    let player = null;
+    let playerReady = false;
+    let isPlaying = false;
+    const musicBtn = document.getElementById('musicToggleBtn');
+    
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtubeMusic', {
+            events: {
+                onReady: (event) => {
+                    playerReady = true;
+                    if (player && player.setVolume) player.setVolume(50);
+                },
+                onStateChange: (event) => {
+                    if (event.data === YT.PlayerState.PLAYING) {
+                        isPlaying = true;
+                        if (musicBtn) musicBtn.innerHTML = '🔊';
+                    } else if (event.data === YT.PlayerState.PAUSED) {
+                        isPlaying = false;
+                        if (musicBtn) musicBtn.innerHTML = '🎵';
+                    }
+                }
             }
         });
-    }, { threshold: 0.2 });
-    cards.forEach(c => observer.observe(c));
+    };
     
-    // МУЗЫКА
-    const youtubeIframe = document.getElementById('youtubeAudio');
-    const musicToggleBtn = document.getElementById('musicToggleBtn');
-    let musicStarted = false, isMuted = false;
-    function startMusic() { 
-        if (musicStarted) return; 
-        musicStarted = true; 
-        youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=0&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
-        musicToggleBtn.innerHTML = '🔊'; 
-        isMuted = false; 
-    }
-    function toggleMute() { 
-        if (!musicStarted) { startMusic(); return; } 
-        if (isMuted) { 
-            youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=0&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
-            musicToggleBtn.innerHTML = '🔊'; 
-            isMuted = false; 
-        } else { 
-            youtubeIframe.src = "https://www.youtube.com/embed/ivrumxRUz_Y?autoplay=1&mute=1&loop=1&playlist=ivrumxRUz_Y&controls=0&showinfo=0&disablekb=1&modestbranding=1&rel=0"; 
-            musicToggleBtn.innerHTML = '🔇'; 
-            isMuted = true; 
-        } 
-    }
-    
-    // ========== ВЫБОР КАРТЫ (GOOGLE или YANDEX) ==========
-    const googleMapsUrl = "https://maps.app.goo.gl/grvBoMDHNV6en5qH7";
-    const yandexMapsUrl = "https://yandex.uz/maps/-/CPGkz2nS";
-    
-    function showMapChoice() {
-        // Создаём overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'map-choice-overlay';
-        overlay.innerHTML = `
-            <div class="map-choice-card">
-                <h3>🗺️ Qaysi xaritada ochish?</h3>
-                <button class="map-btn google-btn" id="chooseGoogle">📍 Google Карты</button>
-                <button class="map-btn yandex-btn" id="chooseYandex">🗺️ Яндекс Карты</button>
-                <button class="map-btn cancel-map-btn" id="cancelMap">Bekor qilish</button>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-        
-        // Анимация появления
-        setTimeout(() => { overlay.style.opacity = '1'; }, 10);
-        
-        // Обработчики
-        document.getElementById('chooseGoogle').onclick = () => {
-            window.open(googleMapsUrl, '_blank');
-            closeOverlay();
-        };
-        document.getElementById('chooseYandex').onclick = () => {
-            window.open(yandexMapsUrl, '_blank');
-            closeOverlay();
-        };
-        document.getElementById('cancelMap').onclick = () => closeOverlay();
-        
-        function closeOverlay() {
-            overlay.style.opacity = '0';
-            setTimeout(() => overlay.remove(), 300);
+    function playMusic() {
+        if (!playerReady || !player) {
+            setTimeout(() => playMusic(), 300);
+            return;
         }
+        if (player.playVideo) player.playVideo();
+        isPlaying = true;
+        if (musicBtn) musicBtn.innerHTML = '🔊';
     }
+    
+    function pauseMusic() {
+        if (playerReady && player && player.pauseVideo) player.pauseVideo();
+        isPlaying = false;
+        if (musicBtn) musicBtn.innerHTML = '🎵';
+    }
+    
+    function toggleMusic() {
+        if (isPlaying) pauseMusic();
+        else playMusic();
+    }
+    if (musicBtn) musicBtn.addEventListener('click', toggleMusic);
     
     const openingOverlay = document.getElementById('openingOverlay');
     const fullInvitation = document.getElementById('fullInvitation');
     const closeInvBtn = document.getElementById('closeInvitationBtn');
-    const musicController = document.getElementById('musicController');
     const openBtn = document.getElementById('openBtn');
-    
-    setTimeout(() => { musicController.classList.add('active'); }, 1500);
-    
     let isOpening = false;
     
-    openBtn.addEventListener('click', function(e) {
-        if (isOpening) return;
-        isOpening = true;
-        startMusic();
-        
-        const animClouds = document.querySelectorAll('.anim-cloud');
-        const directions = [
-            'translateX(-620px) translateY(-280px) scale(2.8)', 
-            'translateX(680px) translateY(300px) scale(2.9)', 
-            'translateX(500px) translateY(-350px) scale(2.7)', 
-            'translateX(-580px) translateY(420px) scale(2.8)', 
-            'translateX(420px) translateY(-220px) scale(2.6)', 
-            'translateX(-480px) translateY(-180px) scale(2.7)', 
-            'translateX(580px) translateY(260px) scale(2.8)', 
-            'translateX(-620px) translateY(340px) scale(2.7)', 
-            'translateX(360px) translateY(-450px) scale(2.6)', 
-            'translateX(640px) translateY(-240px) scale(2.7)', 
-            'translateX(-420px) translateY(480px) scale(2.7)', 
-            'translateX(340px) translateY(420px) scale(2.6)'
-        ];
-        animClouds.forEach((cloud, idx) => { 
-            setTimeout(() => { 
-                cloud.style.transition = 'all 2s cubic-bezier(0.33, 1, 0.68, 1)'; 
-                cloud.style.opacity = '1'; 
-                cloud.style.transform = directions[idx]; 
-                setTimeout(() => { cloud.style.opacity = '0'; }, 1800); 
-            }, idx * 30); 
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            if (isOpening) return;
+            isOpening = true;
+            
+            setTimeout(() => playMusic(), 150);
+            
+            const animClouds = document.querySelectorAll('.anim-cloud');
+            const directions = [
+                'translateX(-700px) translateY(-320px) scale(3.2)',
+                'translateX(780px) translateY(350px) scale(3.3)',
+                'translateX(600px) translateY(-420px) scale(3.0)',
+                'translateX(-650px) translateY(480px) scale(3.1)',
+                'translateX(520px) translateY(-280px) scale(2.9)'
+            ];
+            animClouds.forEach((cloud, idx) => {
+                setTimeout(() => {
+                    if (cloud) {
+                        cloud.style.opacity = '1';
+                        cloud.style.transform = directions[idx];
+                        setTimeout(() => { if (cloud) cloud.style.opacity = '0'; }, 1900);
+                    }
+                }, idx * 40);
+            });
+            
+            setTimeout(() => {
+                if (openingOverlay) openingOverlay.classList.add('hide');
+                if (fullInvitation) fullInvitation.classList.add('open');
+            }, 2100);
         });
-        
-        setTimeout(() => {
-            openingOverlay.classList.add('hide');
-            fullInvitation.classList.add('open');
-        }, 2000);
-    });
+    }
     
-    closeInvBtn.addEventListener('click', () => fullInvitation.classList.remove('open'));
-    musicToggleBtn.addEventListener('click', toggleMute);
+    if (closeInvBtn) {
+        closeInvBtn.addEventListener('click', () => {
+            if (fullInvitation) fullInvitation.classList.remove('open');
+        });
+    }
     
-    // НОВАЯ ФУНКЦИЯ ДЛЯ КНОПКИ ЛОКАЦИИ - показывает выбор карты
-    document.getElementById('locationBtn')?.addEventListener('click', () => {
-        showMapChoice();
-    });
-    
-    document.getElementById('rsvpConfirmBtn').addEventListener('click', () => { 
-        const toast = document.createElement('div'); 
-        toast.innerText = '✨ Благодарим за отклик! ✨'; 
-        toast.style.cssText = 'position:fixed; bottom:90px; left:20px; right:20px; background:rgba(255,245,235,0.96); backdrop-filter:blur(16px); border-radius:50px; padding:0.8rem; text-align:center; font-size:0.8rem; color:#5d3e36; z-index:300; opacity:0; transition:opacity 0.2s;'; 
-        document.body.appendChild(toast); 
-        setTimeout(() => toast.style.opacity = '1', 10); 
-        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2500); 
-    });
-    
-    const inviteScroll = document.getElementById('fullInvitation');
-    inviteScroll.addEventListener('scroll', () => { 
-        const y = inviteScroll.scrollTop; 
-        document.querySelectorAll('.cloud-layer').forEach((cloud, i) => { 
-            const speed = 0.003 + (i * 0.0002); 
-            cloud.style.transform = `translateY(${y * speed}px)`; 
-        }); 
-    });
+    // небольшая коррекция: чтобы таймер отображался корректно при возврате фокуса
+    window.addEventListener('focus', updateTimer);
 </script>
 </body>
 </html>
